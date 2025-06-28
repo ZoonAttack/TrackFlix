@@ -1,0 +1,96 @@
+﻿@model UserLoginModel
+@{
+    Layout = "";
+    ViewData["Title"] = "Login";
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NotFlix - Login & Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/authentication.css" />
+</head>
+<body>
+    <nav class="netflix-navbar">
+        <div class="navbar-left">
+            <a asp-action="index" asp-controller="Home" class="netflix-logo">NOTFLIX</a>
+        </div>
+        <div class="navbar-right">
+            <select class="netflix-lang">
+                <option>English</option>
+                <option>العربية</option>
+                <option>Español</option>
+                <option>Français</option>
+                <option>Japanese</option>
+            </select>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <!-- Login Form -->
+        <div id="login-form" class="form-container active">
+            <h1 class="form-title">Sign In</h1>
+            <form asp-action="Login" asp-controller="User" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="input-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="RememberMe" class="form-check-input"/>
+                    <label asp-for="RememberMe" class="form-check-label">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="new-to-netflix">
+                New to NotFlix?
+                <a asp-action="Register" class="form-switch-btn" data-target="signup-form">Sign up now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-title">Questions? Contact us.</div>
+        <div class="footer-links">
+            <a href="#">FAQ</a>
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Privacy</a>
+        </div>
+        <div class="copyright">&copy; 2025 NotFlix</div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility(toggleId, inputId) {
+            const toggleIcon = document.getElementById(toggleId);
+            const passwordInput = document.getElementById(inputId);
+
+            if (toggleIcon && passwordInput) {
+                toggleIcon.addEventListener('click', () => {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    const icon = toggleIcon.querySelector('i');
+                    icon.classList.toggle('fa-eye');
+                    icon.classList.toggle('fa-eye-slash');
+                });
+            }
+        }
+
+        togglePasswordVisibility('login-password-toggle', 'login-password');
+        togglePasswordVisibility('signup-password-toggle', 'signup-password');
+    </script>
+</body>
+</html>
