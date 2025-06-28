@@ -1,0 +1,78 @@
+﻿@model UserRegisterModel
+@{
+    Layout = "";
+    ViewData["Title"] = "Register";
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NotFlix - Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/authentication.css" />
+</head>
+<body>
+    <nav class="netflix-navbar">
+        <div class="navbar-left">
+            <a asp-action="index" asp-controller="Home" class="netflix-logo">NOTFLIX</a>
+        </div>
+        <div class="navbar-right">
+            <select class="netflix-lang">
+                <option>English</option>
+                <option>العربية</option>
+                <option>Español</option>
+                <option>Français</option>
+                <option>Japanese</option>
+            </select>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Signup Form -->
+        <div id="signup-form" class="form-container active">
+            <h1 class="form-title">Create Account</h1>
+            <form asp-action="Register" asp-controller="User" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-group">
+                    <label asp-for="Username">User Name</label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <div class="form-switch">
+                Already have an account?
+                <a asp-action="Login" class="form-switch-btn">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-title">Questions? Contact us.</div>
+        <div class="footer-links">
+            <a href="#">FAQ</a>
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Privacy</a>
+        </div>
+        <div class="copyright">&copy; 2025 NotFlix</div>
+    </div>
+</body>
+</html>

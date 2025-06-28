@@ -1,0 +1,402 @@
+﻿body {
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #333;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.navbar {
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 10px;
+}
+
+.welcome-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+
+/* #signup {
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+} */
+
+.container {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 60px 68px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 6px;
+    margin-bottom: 90px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border: 2px solid #e50914;
+}
+
+.form-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.input-group input {
+    width: 100%;
+    height: 50px;
+    background: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    padding: 16px 20px 0;
+    outline: none;
+}
+
+.input-group input:focus {
+    background: #454545;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: #8c8c8c;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown)+label {
+    top: 7px;
+    font-size: 11px;
+    transform: none;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    background: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background: #f40612;
+}
+
+.btn:after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.13);
+    background: linear-gradient( to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 77%, rgba(255, 255, 255, 0.5) 92%, rgba(255, 255, 255, 0.0) 100%);
+    transform: rotate(30deg);
+    transition: all 0.7s ease;
+}
+
+.btn:hover:after {
+    left: 130%;
+}
+
+.form-help {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #b3b3b3;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+}
+
+.remember input {
+    margin-right: 5px;
+    accent-color: #b3b3b3;
+}
+
+.form-help a {
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+.form-help a:hover {
+    text-decoration: underline;
+}
+
+.new-to-netflix {
+    color: #737373;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.new-to-netflix a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.new-to-netflix a:hover {
+    text-decoration: underline;
+}
+
+.form-switch {
+    color: #737373;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 16px;
+}
+
+.form-switch-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.form-switch-btn:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 30px 10%;
+    margin-top: 90px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-title {
+    color: #757575;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #757575;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    color: #757575;
+    font-size: 11px;
+    margin-top: 24px;
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8c8c8c;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.language-selector {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: 1px solid #aaa;
+    padding: 8px 30px 8px 15px;
+    border-radius: 4px;
+    margin-left: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}
+.netflix-navbar {
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    background: transparent;
+}
+
+.netflix-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e50914;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+    .netflix-logo i {
+        margin-right: 10px;
+    }
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.netflix-lang {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: 1px solid #aaa;
+    padding: 8px 30px 8px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}
+@media (max-width: 768px) {
+    .netflix-navbar {
+        padding: 15px 20px;
+    }
+
+    .netflix-logo {
+        font-size: 1.5rem;
+    }
+
+    .signin-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 740px) {
+    .container {
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        margin: 0 20px;
+    }
+    .navbar {
+        padding: 20px;
+    }
+    .footer {
+        padding: 20px;
+    }
+    .footer-links {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.netflix-brand {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    z-index: 10;
+}
