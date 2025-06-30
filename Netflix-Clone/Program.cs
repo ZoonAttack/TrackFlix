@@ -28,6 +28,11 @@ namespace Netflix_Clone
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
