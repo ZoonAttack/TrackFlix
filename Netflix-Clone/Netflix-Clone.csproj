@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\Home.css" />
+    <None Include="wwwroot\css\LandingPage.css" />
   </ItemGroup>
 
   <ItemGroup>

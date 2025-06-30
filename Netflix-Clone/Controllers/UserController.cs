@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Netflix_Clone.Data;
@@ -19,8 +20,14 @@ namespace Netflix_Clone.Controllers
             _userManager = userManager;
             _dbContext = dbContext;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -42,13 +49,14 @@ namespace Netflix_Clone.Controllers
 
             if (result.Succeeded)
             {
-                return View("Dashboard", model);
+                return RedirectToAction("Index", "User");
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return RedirectToAction("Login", "Home");
         }
 
+        [HttpPost]
         public async Task<IActionResult> Register(UserRegisterModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -61,7 +69,7 @@ namespace Netflix_Clone.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return View("Dashboard");
+                return RedirectToAction("Index", "User");
             }
             foreach (var error in result.Errors)
             {
@@ -71,20 +79,6 @@ namespace Netflix_Clone.Controllers
 
 
         }
-        public async Task<IActionResult> Dashboard(UserLoginModel model)
-        {
-            return View();
-        }
-        //private IActionResult RedirectToLocal(string returnUrl)
-        //{
-        //    if (Url.IsLocalUrl(returnUrl))
-        //    {
-        //        return Redirect(returnUrl);
-        //    }
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

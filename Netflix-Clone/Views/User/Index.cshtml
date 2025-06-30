@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackFlix - Home</title>
+    <link rel="stylesheet" href="~/css/Home.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">MovieTracker</div>
+        <ul class="nav-links">
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Shows</a></li>
+            <li><a href="#">Genres</a></li>
+            <li><a href="#">My List</a></li>
+        </ul>
+        <form class="search-form">
+            <input type="text" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+
+    <main class="content">
+        <section class="media-section">
+            <h2>Top Trending Movies</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="images/inception.jpg" alt="Inception">
+                    <h3>Inception</h3>
+                    <button class="add-btn">Add to My List</button>
+                </div>
+                <div class="media-card">
+                    <img src="images/interstellar.jpg" alt="Interstellar">
+                    <h3>Interstellar</h3>
+                    <button class="add-btn">Add to My List</button>
+                </div>
+                <div class="media-card">
+                    <img src="images/tenet.jpg" alt="Tenet">
+                    <h3>Tenet</h3>
+                    <button class="add-btn">Add to My List</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="media-section">
+            <h2>Top Trending Shows</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="images/strangerthings.jpg" alt="Stranger Things">
+                    <h3>Stranger Things</h3>
+                    <button class="add-btn">Add to My List</button>
+                </div>
+                <div class="media-card">
+                    <img src="images/witcher.jpg" alt="The Witcher">
+                    <h3>The Witcher</h3>
+                    <button class="add-btn">Add to My List</button>
+                </div>
+                <div class="media-card">
+                    <img src="images/riverdale.jpg" alt="Riverdale">
+                    <h3>Riverdale</h3>
+                    <button class="add-btn">Add to My List</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
