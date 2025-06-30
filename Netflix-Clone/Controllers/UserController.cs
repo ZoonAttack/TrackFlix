@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Netflix_Clone.Data;
 using Netflix_Clone.Models;
 
@@ -26,6 +27,7 @@ namespace Netflix_Clone.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserLoginModel model, string returnUrl = null)
         {
+            User? user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == model.Email);
             ViewData["ReturnUrl"] = returnUrl;
 
             if (!ModelState.IsValid)
@@ -33,8 +35,10 @@ namespace Netflix_Clone.Controllers
                 return View(model);
             }
 
+            if (user == null) return NotFound();
+
             var result = await _signInManager.PasswordSignInAsync(
-                model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                user.UserName!, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -42,7 +46,7 @@ namespace Netflix_Clone.Controllers
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            return View(model);
+            return RedirectToAction("Login", "Home");
         }
 
         public async Task<IActionResult> Register(UserRegisterModel model, string returnUrl = null)
@@ -57,25 +61,29 @@ namespace Netflix_Clone.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Dashboard", "User");
+                return View("Dashboard");
             }
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
-            return View("Dashboard", model);
+            return RedirectToAction("Register", "Home");
+
 
         }
-
-        private IActionResult RedirectToLocal(string returnUrl)
+        public async Task<IActionResult> Dashboard(UserLoginModel model)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-
-            return RedirectToAction("Index", "Home");
+            return View();
         }
+        //private IActionResult RedirectToLocal(string returnUrl)
+        //{
+        //    if (Url.IsLocalUrl(returnUrl))
+        //    {
+        //        return Redirect(returnUrl);
+        //    }
+
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Logout()
