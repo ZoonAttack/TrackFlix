@@ -10,6 +10,7 @@ namespace Netflix_Clone.Mappers
         {
             return new Movie
             {
+                Id = dto.Id,
                 Title = dto.Title,
                 Language = dto.Original_Language,
                 Description = dto.Overview,
@@ -25,10 +26,13 @@ namespace Netflix_Clone.Mappers
         {
             return new Show
             {
+                Id = dto.Id,
                 Title = dto.Name,
                 Language = dto.Original_Language,
                 Description = dto.Overview,
                 PosterURL = $"https://image.tmdb.org/t/p/w300{dto.Poster_Path}",
+                SeasonsCount = dto.Number_Of_Seasons,
+                //Seasons = dto.Seasons,
                 ReleaseDate = dto.First_Air_Date,
                 Rating = dto.Vote_Average,
                 Actors = new List<string>(), // optional default

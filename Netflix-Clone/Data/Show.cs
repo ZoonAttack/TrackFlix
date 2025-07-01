@@ -2,15 +2,15 @@
 
 namespace Netflix_Clone.Data
 {
-    public class Show
-    {
-
+        public class Show
+        {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Language { get; set; }
         public string Description { get; set; }
         public string PosterURL { get; set; }
-        public int Seasons { get; set; }
+        public int SeasonsCount { get; set; }
+        //public List<Show> Seasons { get; set; }
         public List<string> Actors { get; set; }
 
         public string ReleaseDate { get; set; }

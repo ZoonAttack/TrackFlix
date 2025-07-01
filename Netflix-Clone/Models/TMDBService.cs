@@ -68,5 +68,23 @@ namespace Netflix_Clone.Models
             return tmdbResponse?.Results.Select(dto => dto.ToShow()).ToList() ?? new List<Show>();
         }
 
+        public async Task<Movie> GetMovie(int movieId)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/movie/{movieId}?api_key={_apiKey}");
+            var json = await response.Content.ReadAsStringAsync();
+            Movie movie = JsonSerializer.Deserialize<TMDBMovieDto>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!.ToMovie();
+            return movie;
+        }
+        public async Task<Show> GetShow(int showId)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/tv/{showId}?api_key={_apiKey}");
+            var json = await response.Content.ReadAsStringAsync();
+            Show show = JsonSerializer.Deserialize<TMDBShowDto>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!.ToShow();
+            return show;
+        }
     }
 }

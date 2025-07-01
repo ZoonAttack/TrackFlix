@@ -24,6 +24,16 @@ namespace Netflix_Clone.Controllers
             };
             return View(model);
         }
+        public async Task<IActionResult> GetMovieDetails(int movieId)
+        {
+            Movie model = await _tmdbService.GetMovie(movieId);
+            return PartialView("GetMovieDetailsPartial", model);
+        }
+        public async Task<IActionResult> GetShowDetails(int showId)
+        {
+            Show model = await _tmdbService.GetShow(showId);
+            return PartialView("GetShowDetailsPartial", model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Search()

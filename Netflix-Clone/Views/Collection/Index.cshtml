@@ -13,12 +13,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
     <link rel="stylesheet" href="~/css/Home.css" />
-    <script>
-        function scrollSlider(id, direction, amount = 150 * 10) {
-            const slider = document.getElementById(id);
-            slider.scrollBy({ left: amount * direction, behavior: 'smooth' });
-        }
-    </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).on('click', '.card[data-movie-id]', function () {
+            var movieId = $(this).data('movie-id');
+
+            $.ajax({
+                url: '/Collection/GetMovieDetails',
+                type: 'GET',
+                data: { movieId: movieId },
+                success: function (result) {
+                    $('#movie-details-container').html(result);
+                    $('#movie-details-modal').fadeIn();
+                },
+                error: function () {
+                    alert('Error loading movie details');
+                }
+            });
+        });
+        $(document).on('click', '.modal-close, .modal-overlay', function (e) {
+            if ($(e.target).is('.modal-close') || $(e.target).is('.modal-overlay')) {
+                $('#movie-details-modal').fadeOut();
+            }
+        });
+
+
+         $(document).on('click', '.card[data-show-id]', function () {
+            var showId = $(this).data('show-id');
+
+            $.ajax({
+                url: '/Collection/GetShowDetails',
+                type: 'GET',
+                data: { showId: showId },
+                success: function (result) {
+                    $('#show-details-container').html(result);
+                    $('#show-details-modal').fadeIn();
+                },
+                error: function () {
+                    alert('Error loading show details');
+                }
+            });
+        });
+
+        $(document).on('click', '.modal-close, .modal-overlay', function (e) {
+            if ($(e.target).is('.modal-close') || $(e.target).is('.modal-overlay')) {
+                $('#show-details-modal').fadeOut();
+            }
+        });
+            function scrollSlider(id, direction, amount = 150 * 10) {
+                const slider = document.getElementById(id);
+                slider.scrollBy({ left: amount * direction, behavior: 'smooth' });
+            }
+        </script>
 </head>
 <body>
     <main class="main-content">
@@ -31,10 +79,11 @@
                     <div class="card-slider" id="movies">
                         @foreach (var movie in Model.TrendingMovies)
                         {
-                            <div class="card">
+                            <div class="card" data-movie-id="@movie.Id">
                                 <img src="@movie.PosterURL" alt="@movie.Title" />
                                 <div class="card-title">@movie.Title</div>
                             </div>
+
                         }
                     </div>
                     <button class="slider-btn right" onclick="scrollSlider('movies', 1)"><i class="fas fa-chevron-right"></i></button>
@@ -47,7 +96,7 @@
                     <div class="card-slider" id="shows">
                         @foreach (var show in Model.TrendingShows)
                         {
-                            <div class="card">
+                            <div class="card" data-show-id="@show.Id">
                                 <img src="@show.PosterURL" alt="@show.Title" />
                                 <div class="card-title">@show.Title</div>
                             </div>
@@ -67,7 +116,7 @@
                         <div class="card-slider small" id="rec-movies">
                             @foreach (var movie in Model.RecommendedMovies)
                             {
-                                <div class="card small">
+                                <div class="card" data-movie-id="@movie.Id">
                                     <img src="@movie.PosterURL" alt="@movie.Title" />
                                     <div class="card-title">@movie.Title</div>
                                 </div>
@@ -85,7 +134,7 @@
                         <div class="card-slider small" id="rec-shows">
                             @foreach (var show in Model.RecommendedShows)
                             {
-                                <div class="card small">
+                                <div class="card" data-show-id="@show.Id">
                                     <img src="@show.PosterURL" alt="@show.Title" />
                                     <div class="card-title">@show.Title</div>
                                 </div>
@@ -97,5 +146,19 @@
             </section>
         </div>
     </main>
+    <!--Movie Partial view pop up-->
+    <div id="movie-details-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="movie-details-container"></div>
+        </div>
+    </div>
+    <!--Show Partial view pop up-->
+    <div id="show-details-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="show-details-container"></div>
+        </div>
+    </div>
 </body>
 </html>
