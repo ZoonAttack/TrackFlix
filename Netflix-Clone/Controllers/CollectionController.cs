@@ -18,7 +18,9 @@ namespace Netflix_Clone.Controllers
             HomeViewModel model = new()
             {
                 TrendingMovies = await _tmdbService.GetTrendingMoviesAsync(),
-                TrendingShows = await _tmdbService.GetTrendingShowsAsync()
+                TrendingShows = await _tmdbService.GetTrendingShowsAsync(),
+                RecommendedMovies = await _tmdbService.GetRecommendedMoviesAsync(),
+                RecommendedShows = await _tmdbService.GetRecommendedShowsAsync()
             };
             return View(model);
         }

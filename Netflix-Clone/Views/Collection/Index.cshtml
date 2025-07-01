@@ -1,11 +1,9 @@
 ﻿@using Netflix_Clone.Data
 @model HomeViewModel
 @{
-    Layout = "";
-}
-@{
     Layout = "_CollectionLayout";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,17 +14,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
     <link rel="stylesheet" href="~/css/Home.css" />
     <script>
-        function scrollSlider(id, direction) {
+        function scrollSlider(id, direction, amount = 150 * 10) {
             const slider = document.getElementById(id);
-            const card = slider.querySelector('.card');
-            const cardWidth = card.offsetWidth + 16; // card width + gap
-            slider.scrollBy({ left: cardWidth * 2 * direction, behavior: 'smooth' });
+            slider.scrollBy({ left: amount * direction, behavior: 'smooth' });
         }
     </script>
 </head>
 <body>
     <main class="main-content">
-        <div class="content-wrapper">
+        <div class="trending-section">
             <section class="left-section">
                 <!-- Trending Movies -->
                 <div class="section-title">Trending Movies</div>
@@ -45,7 +41,7 @@
                 </div>
 
                 <!-- Trending Shows -->
-                <div class="section-title">Trending Shows</div>
+                <div class="section-title" style="margin-top: 2rem;">Trending Shows</div>
                 <div class="slider-container">
                     <button class="slider-btn left" onclick="scrollSlider('shows', -1)"><i class="fas fa-chevron-left"></i></button>
                     <div class="card-slider" id="shows">
@@ -61,24 +57,41 @@
                 </div>
             </section>
 
+            <!-- Recommended Section -->
             <section class="recommended-section">
+                <!-- Recommended Movies -->
                 <div class="recommended-column">
                     <div class="section-title">Top Recommended Movies</div>
-                    <div class="card-container">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/150x220" alt="Rec Movie 1" />
-                            <div class="card-title">Rec Movie 1</div>
+                    <div class="slider-container small">
+                        <button class="slider-btn left" onclick="scrollSlider('rec-movies', -1, 150 * 3)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="card-slider small" id="rec-movies">
+                            @foreach (var movie in Model.RecommendedMovies)
+                            {
+                                <div class="card small">
+                                    <img src="@movie.PosterURL" alt="@movie.Title" />
+                                    <div class="card-title">@movie.Title</div>
+                                </div>
+                            }
                         </div>
+                        <button class="slider-btn right" onclick="scrollSlider('rec-movies', 1, 150 * 3)"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
 
+                <!-- Recommended Shows -->
                 <div class="recommended-column">
                     <div class="section-title">Top Recommended Shows</div>
-                    <div class="card-container">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/150x220" alt="Rec Show 1" />
-                            <div class="card-title">Rec Show 1</div>
+                    <div class="slider-container small">
+                        <button class="slider-btn left" onclick="scrollSlider('rec-shows', -1, 150 * 3)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="card-slider small" id="rec-shows">
+                            @foreach (var show in Model.RecommendedShows)
+                            {
+                                <div class="card small">
+                                    <img src="@show.PosterURL" alt="@show.Title" />
+                                    <div class="card-title">@show.Title</div>
+                                </div>
+                            }
                         </div>
+                        <button class="slider-btn right" onclick="scrollSlider('rec-shows', 1, 150 * 3)"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
             </section>
