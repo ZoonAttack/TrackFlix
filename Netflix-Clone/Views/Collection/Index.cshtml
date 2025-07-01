@@ -1,0 +1,88 @@
+﻿@using Netflix_Clone.Data
+@model HomeViewModel
+@{
+    Layout = "";
+}
+@{
+    Layout = "_CollectionLayout";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrackFlix - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
+    <link rel="stylesheet" href="~/css/Home.css" />
+    <script>
+        function scrollSlider(id, direction) {
+            const slider = document.getElementById(id);
+            const card = slider.querySelector('.card');
+            const cardWidth = card.offsetWidth + 16; // card width + gap
+            slider.scrollBy({ left: cardWidth * 2 * direction, behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+    <main class="main-content">
+        <div class="content-wrapper">
+            <section class="left-section">
+                <!-- Trending Movies -->
+                <div class="section-title">Trending Movies</div>
+                <div class="slider-container">
+                    <button class="slider-btn left" onclick="scrollSlider('movies', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <div class="card-slider" id="movies">
+                        @foreach (var movie in Model.TrendingMovies)
+                        {
+                            <div class="card">
+                                <img src="@movie.PosterURL" alt="@movie.Title" />
+                                <div class="card-title">@movie.Title</div>
+                            </div>
+                        }
+                    </div>
+                    <button class="slider-btn right" onclick="scrollSlider('movies', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <!-- Trending Shows -->
+                <div class="section-title">Trending Shows</div>
+                <div class="slider-container">
+                    <button class="slider-btn left" onclick="scrollSlider('shows', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <div class="card-slider" id="shows">
+                        @foreach (var show in Model.TrendingShows)
+                        {
+                            <div class="card">
+                                <img src="@show.PosterURL" alt="@show.Title" />
+                                <div class="card-title">@show.Title</div>
+                            </div>
+                        }
+                    </div>
+                    <button class="slider-btn right" onclick="scrollSlider('shows', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <section class="recommended-section">
+                <div class="recommended-column">
+                    <div class="section-title">Top Recommended Movies</div>
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150x220" alt="Rec Movie 1" />
+                            <div class="card-title">Rec Movie 1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommended-column">
+                    <div class="section-title">Top Recommended Shows</div>
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150x220" alt="Rec Show 1" />
+                            <div class="card-title">Rec Show 1</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

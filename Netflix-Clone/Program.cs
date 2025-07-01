@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Netflix_Clone.Data;
+using Netflix_Clone.Models;
 
 namespace Netflix_Clone
 {
@@ -31,8 +32,11 @@ namespace Netflix_Clone
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/User/Login";
+                options.LoginPath = "/Home/Login";
             });
+
+            builder.Services.AddHttpClient<TMDBService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

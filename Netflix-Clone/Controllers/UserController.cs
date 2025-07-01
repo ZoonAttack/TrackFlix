@@ -24,10 +24,6 @@ namespace Netflix_Clone.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            if(!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 
@@ -49,7 +45,7 @@ namespace Netflix_Clone.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "Collection");
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -69,7 +65,7 @@ namespace Netflix_Clone.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "Collection");
             }
             foreach (var error in result.Errors)
             {
@@ -80,6 +76,8 @@ namespace Netflix_Clone.Controllers
 
         }
         [HttpPost]
+
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

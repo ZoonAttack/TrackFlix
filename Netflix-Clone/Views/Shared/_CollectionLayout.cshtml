@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <h1>TrackFlix</h1>
+            </div>
+            <div class="navbar-center">
+                <a href="#">Movies</a>
+                <a href="#">Shows</a>
+                <a href="#">My List</a>
+            </div>
+            <div class="navbar-right">
+                <input type="text" placeholder="Search..." />
+                <button><i class="fas fa-search"></i></button>
+                <img src="https://i.pravatar.cc/32" alt="User Icon" />
+            </div>
+        </nav>
+        @RenderBody()
+    </div>
+</body>
+</html>

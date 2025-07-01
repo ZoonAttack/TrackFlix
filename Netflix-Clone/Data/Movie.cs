@@ -12,7 +12,7 @@ namespace Netflix_Clone.Data
         public string PosterURL { get; set; }
 
         public List<string> Actors { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         public Genre Genre { get; set; }
         public float Rating { get; set; }
 

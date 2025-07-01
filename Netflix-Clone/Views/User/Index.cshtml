@@ -1,5 +1,10 @@
-﻿@{
+﻿@using Netflix_Clone.Data
+@model List<Movie>
+@{
     Layout = "";
+}
+@{
+    Layout = "_HomeLayout";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -12,35 +17,18 @@
     <link rel="stylesheet" href="~/css/Home.css" />
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-left">
-            <h1>TrackFlix</h1>
-        </div>
-        <div class="navbar-center">
-            <a href="#">Movies</a>
-            <a href="#">Shows</a>
-            <a href="#">My List</a>
-        </div>
-        <div class="navbar-right">
-            <input type="text" placeholder="Search..." />
-            <button><i class="fas fa-search"></i></button>
-            <img src="https://i.pravatar.cc/32" alt="User Icon" />
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="trending-section">
             <section class="left-section">
                 <div class="section-title">Trending Movies</div>
                 <div class="card-container">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150x220" alt="Movie 1" />
-                        <div class="card-title">Movie 1</div>
-                    </div>
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150x220" alt="Movie 2" />
-                        <div class="card-title">Movie 2</div>
-                    </div>
+                    @foreach (var movie in Model)
+                    {
+                        <div class="card">
+                            <img src="https://image.tmdb.org/t/p/w500@movie.PosterURL" alt="@movie.Title" />
+                            <div class="card-title">@movie.Title</div>
+                        </div>
+                    }
                 </div>
 
                 <div class="section-title" style="margin-top: 2rem;">Trending Shows</div>

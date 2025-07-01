@@ -1,4 +1,5 @@
-﻿* {
+﻿/* Global Reset */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,6 +11,7 @@ body {
     color: #fff;
 }
 
+/* Navbar (if needed, retain from your existing CSS) */
 .navbar {
     background-color: #000;
     display: flex;
@@ -77,6 +79,7 @@ body {
         margin-left: 1rem;
     }
 
+/* Main Layout */
 .main-content {
     display: flex;
     flex-direction: column;
@@ -84,13 +87,16 @@ body {
     gap: 2rem;
 }
 
-.trending-section {
+.content-wrapper {
     display: flex;
     gap: 2rem;
+    flex-wrap: nowrap;
 }
 
 .left-section {
-    flex: 2;
+    flex: 3;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .section-title {
@@ -98,15 +104,55 @@ body {
     margin-bottom: 1rem;
 }
 
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+/* Slider Styles */
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
 }
 
+.card-slider {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+    .card-slider::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+    .slider-btn.left {
+        left: 0;
+    }
+
+    .slider-btn.right {
+        right: 0;
+    }
+
+/* Card Styles */
 .card {
+    flex: 0 0 140px;
+    max-width: 140px;
     background-color: #222;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 8px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -124,12 +170,18 @@ body {
     }
 
 .card-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #eee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+/* Recommended Section */
 .recommended-section {
+    flex: 1.2;
     display: flex;
+    flex-direction: column;
     gap: 2rem;
 }
 
