@@ -11,13 +11,14 @@ namespace Netflix_Clone.Controllers
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-
+        private readonly TMDBService _tmdbService;
         private readonly ApplicationDbContext _dbContext;
 
-        public UserController(SignInManager<User> signInManager, UserManager<User> userManager, ApplicationDbContext dbContext)
+        public UserController(SignInManager<User> signInManager, UserManager<User> userManager, TMDBService tmdbService, ApplicationDbContext dbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _tmdbService = tmdbService;
             _dbContext = dbContext;
         }
 
@@ -77,6 +78,62 @@ namespace Netflix_Clone.Controllers
         }
         [HttpPost]
 
+        [HttpPost]
+        public async Task<IActionResult> AddMovieToList(AddToListModel model)
+        { 
+            //1: Get the current user
+            var user = await _userManager.GetUserAsync(User);
+            //2: Get the movie/show ID from the request
+            Movie movie = await _tmdbService.GetMovie(model.MovieId);
+            //3: Check if the movie/show already exists in the user's list
+            bool result = await _dbContext.UserMovies
+                .AnyAsync(um => um.UserId == user.Id && um.MovieId == model.MovieId);
+            //4: If it doesn't exist, add it to the user's list
+            UserMovie userMovie = new UserMovie() {
+                MovieId = movie.Id,
+                UserId = user.Id,
+                AddedOn = DateTime.Now,
+                Status = model.Status,
+                Rating = model.Rating
+            };
+            if(!result)
+            {
+                _dbContext.UserMovies.Add(userMovie);
+            }
+            //5: Save changes to the database
+            await _dbContext.SaveChangesAsync();
+            //6: Return a success response
+            return Ok();
+        }
+        public async Task<IActionResult> AddShowToList(AddToListModel model)
+        {
+            //1: Get the current user
+            var user = await _userManager.GetUserAsync(User);
+            //2: Get the show ID from the request
+            Show show = await _tmdbService.GetShow(model.ShowId);
+            //3: Check if the show + season already exists in the user's list
+            bool result = await _dbContext.UserShows
+                .AnyAsync(um => um.UserId == user.Id && um.ShowId == model.ShowId && um.SeasonId != model.SeasonId);
+            //4: If it doesn't exist, add it to the user's list
+            UserShow userMovie = new UserShow()
+            {
+                ShowId = show.Id,
+                SeasonId = model.SeasonId,
+                UserId = user.Id,
+                AddedOn = DateTime.Now,
+                Status = model.Status,
+                Rating = model.Rating,
+                EpisodesWatched = model.EpisodesWatched
+            };
+            if (!result)
+            {
+                _dbContext.UserShows.Add(userMovie);
+            }
+            //5: Save changes to the database
+            await _dbContext.SaveChangesAsync();
+            //6: Return a success response
+            return Ok();
+        }
         [Authorize]
         public async Task<IActionResult> Logout()
         {

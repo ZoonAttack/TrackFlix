@@ -2,6 +2,19 @@
 
 namespace Netflix_Clone.Data
 {
+    public class Season
+    {
+        public string ReleaseDate { get; set; }
+        public int Id { get; set; }
+        public int EpisodesCount { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string PosterURL { get; set; }
+
+        public int SeasonNumber { get; set; }
+
+        public float Rating { get; set; }
+    }
         public class Show
         {
         public int Id { get; set; }
@@ -10,8 +23,8 @@ namespace Netflix_Clone.Data
         public string Description { get; set; }
         public string PosterURL { get; set; }
         public int SeasonsCount { get; set; }
-        //public List<Show> Seasons { get; set; }
-        public List<string> Actors { get; set; }
+        public List<Season>? Seasons { get; set; }
+        public List<string>? Actors { get; set; }
 
         public string ReleaseDate { get; set; }
         public Genre Genre { get; set; }

@@ -34,12 +34,34 @@ namespace Netflix_Clone.Controllers
             Show model = await _tmdbService.GetShow(showId);
             return PartialView("GetShowDetailsPartial", model);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Search()
+        public async Task<IActionResult> AddMovieToList(int movieId)
         {
-            return View();
+            AddToListViewModel model = new AddToListViewModel
+            {
+                Movie = await _tmdbService.GetMovie(movieId),
+                FormModel = new AddToListModel()
+                {
+                    MovieId = movieId
+                }
+            };
+            return PartialView("AddMovieToListPartial", model);
         }
+        public async Task<IActionResult> AddShowToList(int showId)
+        {
+            AddToListViewModel model = new AddToListViewModel
+            {
+                Show = await _tmdbService.GetShow(showId),
+                FormModel = new AddToListModel()
+                {
+                    ShowId = showId
+                }
+            };
+            return PartialView("AddShowToListPartial", model);
+        }
+        //public async Task<IActionResult> AddedToList()
+        //{
+
+        //}
 
     }
 }

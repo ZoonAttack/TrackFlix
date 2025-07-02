@@ -7,9 +7,10 @@ public class UserMovie
     public User User { get; set; }
 
     public int MovieId { get; set; }
-    public Movie Movie { get; set; }
-
     public WatchStatus Status { get; set; }
 
     public DateTime AddedOn { get; set; }
+
+    public float Rating { get; set; }
+
 }

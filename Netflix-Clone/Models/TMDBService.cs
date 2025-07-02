@@ -32,7 +32,6 @@ namespace Netflix_Clone.Models
             return tmdbResponse?.Results.Select(dto => dto.ToMovie()).ToList() ?? new List<Movie>();
         }
 
-
         public async Task<List<Show>> GetTrendingShowsAsync()
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}/trending/tv/day?api_key={_apiKey}");

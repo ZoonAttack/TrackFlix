@@ -1,4 +1,8 @@
-﻿@model Netflix_Clone.Data.Show
+﻿@{
+    Layout = null;
+}
+@model Netflix_Clone.Data.Show
+<link rel="stylesheet" href="~/css/GetDetailsPartial.css" />
 
 <h2>@Model.Title</h2>
 <img src="@Model.PosterURL" alt="@Model.Title" />
@@ -9,7 +13,7 @@
 <p><strong>Release Date:</strong> @Model.ReleaseDate</p>
 
 <div class="modal-actions">
-    <button class="action-btn add-list-btn" data-id="@Model.Id">
+    <button class="action-btn show-add-list-btn" data-id="@Model.Id">
         <i class="fas fa-plus"></i> My List
     </button>
     <button class="action-btn like-btn"><i class="fas fa-thumbs-up"></i> Like</button>
