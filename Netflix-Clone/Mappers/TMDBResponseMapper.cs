@@ -18,8 +18,9 @@ namespace Netflix_Clone.Mappers
                 PosterURL = $"https://image.tmdb.org/t/p/w300{dto.Poster_Path}",
                 ReleaseDate = dto.Release_Date,
                 Rating = dto.Vote_Average,
+                Genres = dto.Genres,
+                GenreIds = dto.Genre_Ids,
                 Actors = new List<string>(), // optional default
-                Genre = Genre.None,
                 UserMovies = new List<UserMovie>()
             };
         }
@@ -36,8 +37,9 @@ namespace Netflix_Clone.Mappers
                 Seasons = dto.Seasons.ToSeasonList(),
                 ReleaseDate = dto.First_Air_Date,
                 Rating = dto.Vote_Average,
+                Genres = dto.Genres,
+                GenreIds = dto.Genre_Ids,
                 Actors = new List<string>(), // optional default
-                Genre = Genre.None,
                 UserShows = new List<UserShow>()
             };
         }

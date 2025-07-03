@@ -15,5 +15,7 @@
         public int Season_Number { get; set; }
 
         public float Vote_Average { get; set; }
+
+
     }
 }

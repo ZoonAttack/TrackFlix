@@ -4,17 +4,20 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/_CollectionLayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
 </head>
 <body>
     <div>
         <nav class="navbar">
-            <div class="navbar-left">
-                <h1>TrackFlix</h1>
+            <div  class="navbar-left">
+                <h1><a asp-action="Index" asp-controller="Collection" class="brand-link">TrackFlix</a></h1>
             </div>
             <div class="navbar-center">
-                <a href="#">Movies</a>
-                <a href="#">Shows</a>
-                <a href="#">My List</a>
+                <a asp-action="GetMoviesPage" asp-controller="Collection">Movies</a>
+                <a asp-action="GetShowsPage" asp-controller="Collection">Shows</a>
+                <a asp-action="GetListPage" asp-controller="Collection">My List</a>
             </div>
             <div class="navbar-right">
                 <input type="text" placeholder="Search..." />
@@ -23,6 +26,30 @@
             </div>
         </nav>
         @RenderBody()
+    </div>
+
+    <!-- Movie Modal -->
+    <div id="movie-details-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content modal-container">
+            <button class="modal-close">&times;</button>
+            <div id="movie-details-container"></div>
+        </div>
+    </div>
+
+    <!-- Add To List Modal -->
+    <div id="add-to-list-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content modal-container">
+            <button class="modal-close close-add-to-list">&times;</button>
+            <div id="add-to-list-container"></div>
+        </div>
+    </div>
+
+    <!--Show details Partial view pop up-->
+    <div id="show-details-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close show-close">&times;</button>
+            <div id="show-details-container"></div>
+        </div>
     </div>
 </body>
 </html>

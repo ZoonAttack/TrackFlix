@@ -1,4 +1,6 @@
-﻿namespace Netflix_Clone.Data.DTOs
+﻿using Netflix_Clone.Data.Utility;
+
+namespace Netflix_Clone.Data.DTOs
 {
     public class TMDBShowDto
     {
@@ -11,5 +13,9 @@
         public List<TMDBSeasonDto> Seasons{ get; set; }
         public int Number_Of_Seasons { get; set; }
         public float Vote_Average { get; set; }
+
+        public List<int>? Genre_Ids { get; set; }
+
+        public List<Genre>? Genres { get; set; }
     }
 }

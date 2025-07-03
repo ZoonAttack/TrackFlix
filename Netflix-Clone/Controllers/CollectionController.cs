@@ -34,6 +34,26 @@ namespace Netflix_Clone.Controllers
             Show model = await _tmdbService.GetShow(showId);
             return PartialView("GetShowDetailsPartial", model);
         }
+
+        public async Task<IActionResult> GetMoviesPage(string option = "")
+        {
+            MoviesPageViewModel model = new MoviesPageViewModel
+            {
+                Genres = await _tmdbService.GetGenresAsync(),
+                Movies = await _tmdbService.GetMoviesAsync(option)
+            };
+            return View("MoviesPage", model);
+        }
+        public async Task<IActionResult> GetShowsPage(int page = 1)
+        {
+            string query = $"?page={page}";
+            ShowsPageViewModel model = new ShowsPageViewModel
+            {
+                Genres = await _tmdbService.GetGenresAsync(),
+                Shows = await _tmdbService.GetShowsAsync(query)
+            };
+            return View("ShowsPage", model);
+        }
         public async Task<IActionResult> AddMovieToList(int movieId)
         {
             AddToListViewModel model = new AddToListViewModel
@@ -63,5 +83,13 @@ namespace Netflix_Clone.Controllers
 
         //}
 
+        //public async Task<IActionResult> FilterMovies()
+        //{
+        //    // Implement filtering logic here
+        //}
+        //public async Task<IActionResult> FilterShows()
+        //{
+        //    // Implement filtering logic here
+        //}
     }
 }

@@ -1,5 +1,7 @@
-﻿using Netflix_Clone.Data;
+﻿using Microsoft.Extensions.Options;
+using Netflix_Clone.Data;
 using Netflix_Clone.Data.DTOs;
+using Netflix_Clone.Data.Utility;
 using Netflix_Clone.Mappers;
 using System.Text.Json;
 
@@ -67,6 +69,48 @@ namespace Netflix_Clone.Models
             return tmdbResponse?.Results.Select(dto => dto.ToShow()).ToList() ?? new List<Show>();
         }
 
+        public async Task<List<Movie>> GetMoviesAsync(string options)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/discover/movie{options}?api_key={_apiKey}");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var tmdbResponse = JsonSerializer.Deserialize<TMDBResponse<TMDBMovieDto>>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
+
+            return tmdbResponse?.Results.Select(dto => dto.ToMovie()).ToList() ?? new List<Movie>();
+        }
+        public async Task<List<Show>> GetShowsAsync(string options)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/discover/tv{options}&api_key={_apiKey}");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var tmdbResponse = JsonSerializer.Deserialize<TMDBResponse<TMDBShowDto>>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
+
+            return tmdbResponse?.Results.Select(dto => dto.ToShow()).ToList() ?? new List<Show>();
+        }
+        internal async Task<List<Genre>> GetGenresAsync()
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/genre/movie/list?api_key={_apiKey}");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            var tmdbResponse = JsonSerializer.Deserialize<TMDBGenreDto>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
+
+            return tmdbResponse.Genres ?? new TMDBGenreDto().Genres;
+        }
+
         public async Task<Movie> GetMovie(int movieId)
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}/movie/{movieId}?api_key={_apiKey}");
@@ -85,5 +129,6 @@ namespace Netflix_Clone.Models
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!.ToShow();
             return show;
         }
+
     }
 }

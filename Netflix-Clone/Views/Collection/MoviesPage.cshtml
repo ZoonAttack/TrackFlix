@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "_CollectionLayout";
+}
+@using Netflix_Clone.Data
+@model MoviesPageViewModel
+<link rel="stylesheet" href="~/css/MoviesPage.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/ajaxHandler.js"></script>
+<main class="main-content">
+        <!-- Filtering Section -->
+        <div id="filters">
+            <label for="genre">Genre:</label>
+            <select id="genre" name="genre">
+				@foreach (var genre in Model.Genres)
+				{
+					<option value="@genre.Id">@genre.Name</option>
+				})
+            </select>
+
+            <label for="sort">Sort By:</label>
+            <select id="sort" name="sort">
+                <option value="title.asc">Title(A-Z)</option>
+                <option value="title.desc">Title(Z-A)</option>
+                <option value="vote-average.desc">Rating</option>
+                <option value="popularity.asc">Popularity ASC</option>
+                <option value="popularity.desc">Popularity DESC</option>
+            </select>
+        </div>
+
+        <!-- Movie Cards Section -->
+        <div id="movies">
+            @foreach (var movie in Model.Movies)
+            {
+                <div class="card" data-movie-id="@movie.Id">
+                    <img src="@movie.PosterURL" alt="@movie.Title" />
+                    <div class="card-title">@movie.Title</div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination Section -->
+        <nav aria-label="pagination">
+            <ul class="pagination">
+                <li>
+                    <a href="">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="visuallyhidden">previous set of pages</span>
+                    </a>
+                </li>
+                <li><a href=""><span class="visuallyhidden">page </span>1</a></li>
+                <li><a href="" aria-current="page"><span class="visuallyhidden">page </span>2</a></li>
+                <li><a href=""><span class="visuallyhidden">page </span>3</a></li>
+                <li><a href=""><span class="visuallyhidden">page </span>4</a></li>
+                <li>
+                    <a href="">
+                        <span class="visuallyhidden">next set of pages</span><span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+</main>

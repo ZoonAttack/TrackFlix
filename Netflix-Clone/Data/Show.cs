@@ -25,13 +25,13 @@ namespace Netflix_Clone.Data
         public int SeasonsCount { get; set; }
         public List<Season>? Seasons { get; set; }
         public List<string>? Actors { get; set; }
-
         public string ReleaseDate { get; set; }
-        public Genre Genre { get; set; }
         public float Rating { get; set; }
 
         public ICollection<UserShow> UserShows { get; set; }
 
-
+        //Might remove later..
+        public List<Genre> Genres { get; set; }
+        public List<int> GenreIds { get; set; }
     }
 }

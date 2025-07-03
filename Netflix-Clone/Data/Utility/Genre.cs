@@ -1,13 +1,9 @@
 ﻿namespace Netflix_Clone.Data.Utility
 {
-    public enum Genre
+    public class Genre
     {
-        None = 0,
-        ACTION,
-        ADVENTURE,
-        HORROR,
-        ROMCOM,
-        DRAMA,
-        DETECTIVE
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
