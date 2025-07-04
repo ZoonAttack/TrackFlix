@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Netflix_Clone.Data;
+using Netflix_Clone.Models;
 
 namespace Netflix_Clone
 {
@@ -16,7 +17,7 @@ namespace Netflix_Clone
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
@@ -28,6 +29,14 @@ namespace Netflix_Clone
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Home/Login";
+            });
+
+            builder.Services.AddHttpClient<TMDBService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -158,93 +158,6 @@ namespace Netflix_Clone.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Netflix_Clone.Data.Movie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Actors")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PosterURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("Netflix_Clone.Data.Show", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Actors")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PosterURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Seasons")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Shows");
-                });
-
             modelBuilder.Entity("Netflix_Clone.Data.User", b =>
                 {
                     b.Property<string>("Id")
@@ -321,12 +234,13 @@ namespace Netflix_Clone.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "MovieId");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("UserMovies");
                 });
@@ -342,12 +256,19 @@ namespace Netflix_Clone.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("EpisodesWatched")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "ShowId");
-
-                    b.HasIndex("ShowId");
 
                     b.ToTable("UserShows");
                 });
@@ -405,50 +326,24 @@ namespace Netflix_Clone.Migrations
 
             modelBuilder.Entity("UserMovie", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.Movie", "Movie")
-                        .WithMany("UserMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Netflix_Clone.Data.User", "User")
                         .WithMany("Movies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Movie");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("UserShow", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.Show", "Show")
-                        .WithMany("UserShows")
-                        .HasForeignKey("ShowId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Netflix_Clone.Data.User", "User")
                         .WithMany("Shows")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Show");
-
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Netflix_Clone.Data.Movie", b =>
-                {
-                    b.Navigation("UserMovies");
-                });
-
-            modelBuilder.Entity("Netflix_Clone.Data.Show", b =>
-                {
-                    b.Navigation("UserShows");
                 });
 
             modelBuilder.Entity("Netflix_Clone.Data.User", b =>

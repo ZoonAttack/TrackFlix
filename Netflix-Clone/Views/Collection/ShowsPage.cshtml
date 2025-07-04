@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_CollectionLayout";
+}
+@using Netflix_Clone.Data
+@model ShowsPageViewModel
+<link rel="stylesheet" href="~/css/ShowsPage.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/ajaxHandler.js"></script>
+<body>
+    <main class="main-content">
+        <!-- Filtering Section -->
+        <div id="filters">
+            <label for="genre">Genre:</label>
+            <select id="genre" name="genre">
+                @foreach (var genre in Model.Genres)
+                {
+                    <option value="@genre.Id">@genre.Name</option>
+                })
+            </select>
+
+            <label for="sort">Sort By:</label>
+            <select id="sort" name="sort">
+                <option value="popularity">Popularity</option>
+                <option value="rating">Rating</option>
+                <option value="release">Release Date</option>
+                <option value="title">Title</option>
+            </select>
+        </div>
+
+        <!-- Movie Cards Section -->
+        <div id="shows">
+            @foreach (var show in Model.Shows)
+            {
+                <div class="card" data-show-id="@show.Id">
+                    <img src="@show.PosterURL" alt="@show.Title" />
+                    <div class="card-title">@show.Title</div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination Section -->
+        <nav aria-label="pagination">
+            <ul class="pagination">
+                @for (int i = 1; i <= 10; i++)
+                {
+                    <li><a asp-action="GetShowsPage" asp-controller="Collection" asp-route-page=@i><span class="visuallyhidden">page </span>@i</a></li>
+                }
+            </ul>
+        </nav>
+    </main>
+</body>

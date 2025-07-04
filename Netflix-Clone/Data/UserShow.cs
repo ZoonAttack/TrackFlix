@@ -8,9 +8,12 @@ public class UserShow
     public User User { get; set; }
 
     public int ShowId { get; set; }
-    public Show Show { get; set; }
 
+    public int SeasonId { get; set; }
     public WatchStatus Status { get; set; }
 
     public DateTime AddedOn { get; set; }
+    public float Rating { get; set; }
+    public int EpisodesWatched { get; set; }
+
 }

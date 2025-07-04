@@ -1,0 +1,154 @@
+﻿/* Ensure modal is hidden initially */
+#add-to-list-modal {
+    display: none;
+}
+
+    /* Modal overlay with blur */
+    #add-to-list-modal.modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+    }
+
+    /* Modal content layout */
+    #add-to-list-modal .modal-content.modal-container {
+        background-color: #141414;
+        color: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 960px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        gap: 2rem;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+        position: relative;
+        animation: fadeInModal 0.3s ease-in-out;
+    }
+
+    /* Poster column */
+    #add-to-list-modal .poster-column {
+        flex: 0 0 auto;
+    }
+
+    #add-to-list-modal .modal-poster {
+        width: 200px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    /* Details column */
+    #add-to-list-modal .details-column {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    /* Title styling */
+    #add-to-list-modal .modal-title {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    /* Form elements */
+    #add-to-list-modal .form-group {
+        margin-bottom: 1.2rem;
+    }
+
+    #add-to-list-modal .form-control {
+        width: 100%;
+        padding: 0.6rem 0.75rem;
+        background-color: #2c2c2c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.95rem;
+    }
+
+        #add-to-list-modal .form-control:focus {
+            outline: none;
+            background-color: #3a3a3a;
+        }
+
+    #add-to-list-modal .rating-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    #add-to-list-modal .rating-out-of {
+        color: #aaa;
+    }
+
+    /* Submit / Action buttons */
+    #add-to-list-modal .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 2rem;
+    }
+
+    #add-to-list-modal .action-btn {
+        background-color: #e50914;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: background 0.3s ease;
+    }
+
+        #add-to-list-modal .action-btn:hover {
+            background-color: #f40612;
+        }
+
+        #add-to-list-modal .action-btn.secondary {
+            background-color: transparent;
+            border: 1px solid #aaa;
+            color: #aaa;
+        }
+
+            #add-to-list-modal .action-btn.secondary:hover {
+                border-color: white;
+                color: white;
+            }
+
+    /* Close button */
+    #add-to-list-modal .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+/* Optional animation */
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

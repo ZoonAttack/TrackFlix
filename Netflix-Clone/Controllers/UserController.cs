@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Netflix_Clone.Data;
 using Netflix_Clone.Models;
 
@@ -9,15 +11,18 @@ namespace Netflix_Clone.Controllers
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-
+        private readonly TMDBService _tmdbService;
         private readonly ApplicationDbContext _dbContext;
 
-        public UserController(SignInManager<User> signInManager, UserManager<User> userManager, ApplicationDbContext dbContext)
+        public UserController(SignInManager<User> signInManager, UserManager<User> userManager, TMDBService tmdbService, ApplicationDbContext dbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _tmdbService = tmdbService;
             _dbContext = dbContext;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -26,6 +31,7 @@ namespace Netflix_Clone.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserLoginModel model, string returnUrl = null)
         {
+            User? user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == model.Email);
             ViewData["ReturnUrl"] = returnUrl;
 
             if (!ModelState.IsValid)
@@ -33,18 +39,21 @@ namespace Netflix_Clone.Controllers
                 return View(model);
             }
 
+            if (user == null) return NotFound();
+
             var result = await _signInManager.PasswordSignInAsync(
-                model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                user.UserName!, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                return View("Dashboard", model);
+                return RedirectToAction("Index", "Collection");
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            return View(model);
+            return RedirectToAction("Login", "Home");
         }
 
+        [HttpPost]
         public async Task<IActionResult> Register(UserRegisterModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -57,27 +66,75 @@ namespace Netflix_Clone.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Dashboard", "User");
+                return RedirectToAction("Index", "Collection");
             }
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
-            return View("Dashboard", model);
+            return RedirectToAction("Register", "Home");
+
 
         }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
+        [HttpPost]
 
         [HttpPost]
+        public async Task<IActionResult> AddMovieToList(AddToListModel model)
+        { 
+            //1: Get the current user
+            var user = await _userManager.GetUserAsync(User);
+            //2: Get the movie/show ID from the request
+            Movie movie = await _tmdbService.GetMovie(model.MovieId);
+            //3: Check if the movie/show already exists in the user's list
+            bool result = await _dbContext.UserMovies
+                .AnyAsync(um => um.UserId == user.Id && um.MovieId == model.MovieId);
+            //4: If it doesn't exist, add it to the user's list
+            UserMovie userMovie = new UserMovie() {
+                MovieId = movie.Id,
+                UserId = user.Id,
+                AddedOn = DateTime.Now,
+                Status = model.Status,
+                Rating = model.Rating
+            };
+            if(!result)
+            {
+                _dbContext.UserMovies.Add(userMovie);
+            }
+            //5: Save changes to the database
+            await _dbContext.SaveChangesAsync();
+            //6: Return a success response
+            return Ok();
+        }
+        public async Task<IActionResult> AddShowToList(AddToListModel model)
+        {
+            //1: Get the current user
+            var user = await _userManager.GetUserAsync(User);
+            //2: Get the show ID from the request
+            Show show = await _tmdbService.GetShow(model.ShowId);
+            //3: Check if the show + season already exists in the user's list
+            bool result = await _dbContext.UserShows
+                .AnyAsync(um => um.UserId == user.Id && um.ShowId == model.ShowId && um.SeasonId != model.SeasonId);
+            //4: If it doesn't exist, add it to the user's list
+            UserShow userMovie = new UserShow()
+            {
+                ShowId = show.Id,
+                SeasonId = model.SeasonId,
+                UserId = user.Id,
+                AddedOn = DateTime.Now,
+                Status = model.Status,
+                Rating = model.Rating,
+                EpisodesWatched = model.EpisodesWatched
+            };
+            if (!result)
+            {
+                _dbContext.UserShows.Add(userMovie);
+            }
+            //5: Save changes to the database
+            await _dbContext.SaveChangesAsync();
+            //6: Return a success response
+            return Ok();
+        }
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
