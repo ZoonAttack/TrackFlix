@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "My List";
+}
+
+@{
+    Layout = "";
+}
+@* <a href="/Collection/Mylist" class="btn btn-danger">My List</a> *@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Netflix_Clone.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="css/Stylemylist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar d-flex justify-content-between align-items-center">
+        <h1 class="mdl-style-header text-lg m-0" style="color: red;">My List</h1>
+        <div class="top-bar-actions d-flex align-items-center">
+            <input type="text" id="searchBox" placeholder="Search..." />
+            <i class="fa fa-user user-icon ms-3" title="Account"></i>
+        </div>
+    </div>
+
+    <button id="toggleButton">Content</button>
+
+    <!-- Navigation Tabs -->
+    <div class="mdl-style-nav-desktop" id="navContent">
+        <ul class="mdl-style-tabs nav nav-tabs">
+            <li class="page-item nav-item active"><a class="nav-link" href="#" onclick="filterByStatus('ALL')">All Movies And Shows</a></li>
+            <li class="page-item nav-item"><a class="nav-link" href="#" onclick="filterByStatus('CURRENTLY_WATCHING')">Currently Watching</a></li>
+            <li class="page-item nav-item"><a class="nav-link" href="#" onclick="filterByStatus('COMPLETED')">Completed</a></li>
+            <li class="page-item nav-item"><a class="nav-link" href="#" onclick="filterByStatus('ON_HOLD')">On Hold</a></li>
+            <li class="page-item nav-item"><a class="nav-link" href="#" onclick="filterByStatus('DROPPED')">Dropped</a></li>
+            <li class="page-item nav-item"><a class="nav-link" href="#" onclick="filterByStatus('PLAN_TO_WATCH')">Plan to Watch</a></li>
+            <li class="page-item nav-item"><a class="nav-link" href="#" onclick="filterByStatus('NOT_INTERESTED')">Not Interested</a></li>
+        </ul>
+    </div>
+
+    <!-- List Table -->
+    <div id="mylist_2" class="mdl-style-list-body section mylist table-responsive">
+        <h3 id="tableTitle" class="mdl-style-list-label" style="color:white">All Movies And Shows</h3>
+
+        <table id="list_2" class="mdl-style-table table table-striped m-b-0">
+            <thead class="primary">
+                <tr>
+                    <th width="30" class="mdl-style-thead-num text-center hidden-sm-down">#</th>
+                    <th width="300" class="mdl-style-thead-title left">Title</th>
+                    <th width="100" class="mdl-style-thead-country text-center hidden-sm-down">Country</th>
+                    <th width="85" class="mdl-style-thead-year text-center hidden-sm-down">Year</th>
+                    <th width="85" class="mdl-style-thead-type text-center hidden-sm-down">Type</th>
+                    <th width="110" class="mdl-style-thead-score text-center">Score</th>
+                    <th width="105" class="mdl-style-thead-progress text-center">Progress</th>
+                </tr>
+            </thead>
+            <tbody id="content_2_0">
+                <tr class="td2" data-status="COMPLETED">
+                    <th align="center">1</th>
+                    <td><span class="movie-title">18 Again</span></td>
+                    <td align="center">South Korea</td>
+                    <td align="center">2020</td>
+                    <td align="center">Drama</td>
+                    <td align="center"><span class="score">9.0</span></td>
+                    <td align="center">16/16</td>
+                </tr>
+                <tr class="td1" data-status="CURRENTLY_WATCHING">
+                    <th align="center">2</th>
+                    <td><span class="movie-title">A Killer Paradox</span></td>
+                    <td align="center">South Korea</td>
+                    <td align="center">2024</td>
+                    <td align="center">Drama</td>
+                    <td align="center"><span class="score">7.5</span></td>
+                    <td align="center">8/8</td>
+                </tr>
+                <tr class="td2" data-status="PLAN_TO_WATCH">
+                    <th align="center">3</th>
+                    <td><span class="movie-title">A Normal Family</span></td>
+                    <td align="center">South Korea</td>
+                    <td align="center">2023</td>
+                    <td align="center">Movie</td>
+                    <td align="center"><span class="score">5.5</span></td>
+                    <td align="center">1/1</td>
+                </tr>
+                <tr class="td1" data-status="DROPPED">
+                    <th align="center">4</th>
+                    <td><span class="movie-title">All of Us Are Dead</span></td>
+                    <td align="center">South Korea</td>
+                    <td align="center">2022</td>
+                    <td align="center">Drama</td>
+                    <td align="center"><span class="score">9.0</span></td>
+                    <td align="center">12/12</td>
+                </tr>
+                <tr class="td2" data-status="ON_HOLD">
+                    <th align="center">5</th>
+                    <td><span class="movie-title">Big Mouth</span></td>
+                    <td align="center">South Korea</td>
+                    <td align="center">2022</td>
+                    <td align="center">Drama</td>
+                    <td align="center"><span class="score">7.0</span></td>
+                    <td align="center">16/16</td>
+                </tr>
+                <tr class="td1" data-status="NOT_INTERESTED">
+                    <th align="center">6</th>
+                    <td><span class="movie-title">Bloodhounds</span></td>
+                    <td align="center">South Korea</td>
+                    <td align="center">2023</td>
+                    <td align="center">Drama</td>
+                    <td align="center"><span class="score">8.0</span></td>
+                    <td align="center">8/8</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- List Footer -->
+    <div class="mdl-style-list-footer box-footer b-t list-statistics">
+        <label class="mdl-style-dramas"><span class="name">Dramas</span><span class="cnt">19</span></label>
+        <label class="mdl-style-tvshows"><span class="name">TV Shows</span><span class="cnt">0</span></label>
+        <label class="mdl-style-episodes"><span class="name">Episodes</span><span class="cnt">235</span></label>
+        <label class="mdl-style-movies"><span class="name">Movies</span><span class="cnt">7</span></label>
+        <label class="mdl-style-days"><span class="name">Days</span><span class="cnt">11.2</span></label>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const button = document.getElementById('toggleButton');
+        const content = document.getElementById('navContent');
+        const title = document.getElementById('tableTitle');
+
+        button.addEventListener('click', () => {
+            content.style.display = (content.style.display === 'none' || content.style.display === '') ? 'block' : 'none';
+        });
+
+        function filterByStatus(status) {
+            const rows = document.querySelectorAll('#content_2_0 tr');
+
+            rows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+                row.style.display = (status === 'ALL' || rowStatus === status) ? '' : 'none';
+            });
+
+            // 📝 تغيير عنوان الجدول
+            let statusTitleMap = {
+                'ALL': 'All Movies And Shows',
+                'CURRENTLY_WATCHING': 'Currently Watching',
+                'COMPLETED': 'Completed',
+                'ON_HOLD': 'On Hold',
+                'DROPPED': 'Dropped',
+                'PLAN_TO_WATCH': 'Plan to Watch',
+                'NOT_INTERESTED': 'Not Interested'
+            };
+
+            title.textContent = statusTitleMap[status] || 'My List';
+        }
+    </script>
+
+
+</body>
+</html>
