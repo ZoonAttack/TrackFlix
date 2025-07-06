@@ -1,269 +1,152 @@
-﻿
-body, #mydramalist {
+﻿/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #141414;
-    color: #ffffff; /* لون النص الأبيض */
-    font-family: Arial, sans-serif;
+    color: white;
 }
 
-/* === العنوان الرئيسي === */
-/* ✅ الشريط العلوي */
-.top-bar {
-    display: flex; /* ✅ الشريط العلوي */
-    .top-bar
-
-{
+/* Navbar */
+nav.navbar {
+    background-color: #000;
+    padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding: 10px 0;
-}
-
-/* ✅ مربع البحث */
-#searchBox {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    background-color: #333;
+    justify-content: space-between;
     color: white;
-    font-size: 14px;
-    width: 200px;
+    border-bottom: 1px solid #222;
 }
 
-/* ✅ أيقونة المستخدم */
-.user-icon {
-    font-size: 22px;
-    color: white;
-    cursor: pointer;
-}
-
-    .user-icon:hover {
+    nav.navbar h2 {
         color: #e50914;
+        font-size: 1.5rem;
+        text-decoration: none;
+        cursor: pointer;
     }
 
-/* تباعد بسيط بين مربع البحث والأيقونة */
-.ms-3 {
-    margin-left: 15px;
-}
+        nav.navbar h2:hover {
+            opacity: 0.8;
+        }
 
-justify-content: space-between;
-align-items: center;
-margin-bottom: 30px;
-padding: 10px 0;
-}
-
-/* ✅ مربع البحث */
-#searchBox {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    background-color: #333;
-    color: white;
-    font-size: 14px;
-    width: 200px;
-}
-
-/* ✅ أيقونة المستخدم */
-.user-icon {
-    font-size: 22px;
-    color: white;
-    cursor: pointer;
-}
-
-    .user-icon:hover {
-        color: #e50914;
-    }
-
-/* تباعد بسيط بين مربع البحث والأيقونة */
-.ms-3 {
-    margin-left: 15px;
-}
-
-
-
-/* زر Content */
+/* Toggle button */
 #toggleButton {
     background-color: #e50914;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.5rem 1.2rem;
+    margin: 1rem;
     cursor: pointer;
-    margin-bottom: 20px;
+    font-size: 0.95rem;
     border-radius: 4px;
 }
 
     #toggleButton:hover {
-        background-color: #ff1f1f;
+        background-color: #f40612;
     }
 
-/* شريط التبويبات */
-.mdl-style-nav-desktop {
-    background-color: #1f1f1f;
-    border-bottom: 2px solid #e50914;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    display: none; /* مخفي في البداية */
-}
-
-.mdl-style-tabs .nav-link {
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-}
-
-    .mdl-style-tabs .nav-link:hover {
-        color: #e50914;
-    }
-
-.nav-item.active .nav-link {
-    color: #e50914;
-}
-
+/* Tabs Navigation */
 .mdl-style-tabs {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: center;
+    list-style: none;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    border-bottom: 1px solid #333;
+    background-color: #1a1a1a;
 }
 
-/* === التبويبات (Nav Tabs) - سطح المكتب === */
-.mdl-style-nav-desktop {
-    background-color: #1f1f1f;
-    border-bottom: 2px solid #e50914;
-    padding: 10px 0;
-    margin-bottom: 20px;
-}
-
-.mdl-style-tabs .nav-link {
-    color: #ffffff;
-    padding: 10px 15px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-    .mdl-style-tabs .nav-link:hover {
-        background-color: #333;
-        color: #e50914;
+    .mdl-style-tabs li a {
+        display: block;
+        padding: 0.75rem 1.5rem;
+        color: #ccc;
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
     }
 
-.mdl-style-tabs .nav-item.active .nav-link {
-    background-color: #e50914;
-    color: #ffffff;
-}
+        .mdl-style-tabs li.active a,
+        .mdl-style-tabs li a:hover {
+            color: white;
+            border-bottom: 3px solid #e50914;
+        }
 
-/* === التبويبات (Nav Select) - الجوال === */
-.mdl-style-select {
-    background-color: #1f1f1f;
-    color: #ffffff;
-    border: 1px solid #444;
-}
-
-    .mdl-style-select option {
-        background-color: #1f1f1f;
-        color: #ffffff;
-    }
-
-/* === القسم: Completed Header === */
-.mdl-style-table-header {
-    background-color: #1f1f1f;
-    padding: 15px;
-    border-bottom: 2px solid #e50914;
-    margin-bottom: 10px;
+/* Watchlist Table */
+.mdl-style-list-body {
+    padding: 0 2rem;
 }
 
 .mdl-style-list-label {
-    color: #e50914;
-    font-size: 1.5em;
-    margin: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
 }
 
-/*body
-
-{
-    background-color: #141414;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-}
-*/
-/* تنسيق الجدول */
-table.mdl-style-table {
+.mdl-style-table {
     width: 100%;
     border-collapse: collapse;
     background-color: #1f1f1f;
-    color: #ffffff;
+    color: white;
 }
 
-    /* رأس الجدول */
-    table.mdl-style-table thead.primary {
-        background-color: #e50914;
-        color: #ffffff;
+    .mdl-style-table thead {
+        background-color: #2a2a2a;
     }
 
-    table.mdl-style-table thead th {
-        padding: 12px;
+    .mdl-style-table th,
+    .mdl-style-table td {
+        padding: 0.75rem 1rem;
         text-align: center;
-        border-bottom: 2px solid #e50914;
-        font-weight: bold;
-    }
-
-    /* صفوف الجدول */
-    table.mdl-style-table tbody tr {
         border-bottom: 1px solid #333;
-        transition: background-color 0.3s;
     }
 
-        table.mdl-style-table tbody tr:hover {
-            background-color: #333;
-        }
-
-    /* الخلايا */
-    table.mdl-style-table td,
-    table.mdl-style-table th {
-        padding: 10px;
-        text-align: center;
-    }
-
-    /* الروابط داخل العناوين */
-    table.mdl-style-table .title a {
+    .mdl-style-table .movie-title {
         color: #e50914;
-        text-decoration: none;
-        font-weight: bold;
+        font-weight: 500;
     }
 
-        table.mdl-style-table .title a:hover {
-            text-decoration: underline;
-            color: #ff1f1f;
-        }
+    .mdl-style-table .score {
+        font-weight: bold;
+        color: #ffd700;
+    }
 
-/* التقييم كنسبة */
-.rating .fill {
-    background-color: #e50914;
-    height: 100%;
-    display: block;
+/* Alternating row colors */
+#list_2 tr:nth-child(odd) {
+    background-color: #222;
 }
 
-/* الفوتر */
+#list_2 tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+/* Footer Stats */
 .mdl-style-list-footer {
-    background-color: #1f1f1f;
-    padding: 15px;
-    border-top: 1px solid #333;
-    color: #b3b3b3;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    background-color: #1a1a1a;
+    border-top: 1px solid #333;
+    color: #ccc;
+    gap: 1.5rem;
 }
 
     .mdl-style-list-footer label {
-        font-size: 14px;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 0.95rem;
     }
 
-.movie-title {
-    color: white;
-    font-weight: 600;
-    font-size: 16px;
-}
+    .mdl-style-list-footer .cnt {
+        color: #fff;
+        font-weight: 500;
+    }

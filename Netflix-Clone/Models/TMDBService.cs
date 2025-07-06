@@ -71,7 +71,7 @@ namespace Netflix_Clone.Models
 
         public async Task<List<Movie>> GetMoviesAsync(string options)
         {
-            var response = await _httpClient.GetAsync($"{_baseUrl}/discover/movie{options}?api_key={_apiKey}");
+            var response = await _httpClient.GetAsync($"{_baseUrl}/discover/movie?api_key={_apiKey}&{options}");
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
@@ -85,7 +85,7 @@ namespace Netflix_Clone.Models
         }
         public async Task<List<Show>> GetShowsAsync(string options)
         {
-            var response = await _httpClient.GetAsync($"{_baseUrl}/discover/tv{options}&api_key={_apiKey}");
+            var response = await _httpClient.GetAsync($"{_baseUrl}/discover/tv?api_key={_apiKey}&{options}");
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
