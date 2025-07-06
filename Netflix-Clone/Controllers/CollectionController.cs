@@ -79,11 +79,7 @@ namespace Netflix_Clone.Controllers
             };
             return PartialView("AddShowToListPartial", model);
         }
-        public IActionResult Mylist()
-        {
 
-            return View("Mylist");
-        }
         //public async Task<IActionResult> AddedToList()
         //{
 
