@@ -1,0 +1,269 @@
+﻿
+body, #mydramalist {
+    background-color: #141414;
+    color: #ffffff; /* لون النص الأبيض */
+    font-family: Arial, sans-serif;
+}
+
+/* === العنوان الرئيسي === */
+/* ✅ الشريط العلوي */
+.top-bar {
+    display: flex; /* ✅ الشريط العلوي */
+    .top-bar
+
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+/* ✅ مربع البحث */
+#searchBox {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    width: 200px;
+}
+
+/* ✅ أيقونة المستخدم */
+.user-icon {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+}
+
+    .user-icon:hover {
+        color: #e50914;
+    }
+
+/* تباعد بسيط بين مربع البحث والأيقونة */
+.ms-3 {
+    margin-left: 15px;
+}
+
+justify-content: space-between;
+align-items: center;
+margin-bottom: 30px;
+padding: 10px 0;
+}
+
+/* ✅ مربع البحث */
+#searchBox {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    width: 200px;
+}
+
+/* ✅ أيقونة المستخدم */
+.user-icon {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+}
+
+    .user-icon:hover {
+        color: #e50914;
+    }
+
+/* تباعد بسيط بين مربع البحث والأيقونة */
+.ms-3 {
+    margin-left: 15px;
+}
+
+
+
+/* زر Content */
+#toggleButton {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+    #toggleButton:hover {
+        background-color: #ff1f1f;
+    }
+
+/* شريط التبويبات */
+.mdl-style-nav-desktop {
+    background-color: #1f1f1f;
+    border-bottom: 2px solid #e50914;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    display: none; /* مخفي في البداية */
+}
+
+.mdl-style-tabs .nav-link {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+}
+
+    .mdl-style-tabs .nav-link:hover {
+        color: #e50914;
+    }
+
+.nav-item.active .nav-link {
+    color: #e50914;
+}
+
+.mdl-style-tabs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* === التبويبات (Nav Tabs) - سطح المكتب === */
+.mdl-style-nav-desktop {
+    background-color: #1f1f1f;
+    border-bottom: 2px solid #e50914;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.mdl-style-tabs .nav-link {
+    color: #ffffff;
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+    .mdl-style-tabs .nav-link:hover {
+        background-color: #333;
+        color: #e50914;
+    }
+
+.mdl-style-tabs .nav-item.active .nav-link {
+    background-color: #e50914;
+    color: #ffffff;
+}
+
+/* === التبويبات (Nav Select) - الجوال === */
+.mdl-style-select {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+    .mdl-style-select option {
+        background-color: #1f1f1f;
+        color: #ffffff;
+    }
+
+/* === القسم: Completed Header === */
+.mdl-style-table-header {
+    background-color: #1f1f1f;
+    padding: 15px;
+    border-bottom: 2px solid #e50914;
+    margin-bottom: 10px;
+}
+
+.mdl-style-list-label {
+    color: #e50914;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/*body
+
+{
+    background-color: #141414;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+*/
+/* تنسيق الجدول */
+table.mdl-style-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+    /* رأس الجدول */
+    table.mdl-style-table thead.primary {
+        background-color: #e50914;
+        color: #ffffff;
+    }
+
+    table.mdl-style-table thead th {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 2px solid #e50914;
+        font-weight: bold;
+    }
+
+    /* صفوف الجدول */
+    table.mdl-style-table tbody tr {
+        border-bottom: 1px solid #333;
+        transition: background-color 0.3s;
+    }
+
+        table.mdl-style-table tbody tr:hover {
+            background-color: #333;
+        }
+
+    /* الخلايا */
+    table.mdl-style-table td,
+    table.mdl-style-table th {
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* الروابط داخل العناوين */
+    table.mdl-style-table .title a {
+        color: #e50914;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        table.mdl-style-table .title a:hover {
+            text-decoration: underline;
+            color: #ff1f1f;
+        }
+
+/* التقييم كنسبة */
+.rating .fill {
+    background-color: #e50914;
+    height: 100%;
+    display: block;
+}
+
+/* الفوتر */
+.mdl-style-list-footer {
+    background-color: #1f1f1f;
+    padding: 15px;
+    border-top: 1px solid #333;
+    color: #b3b3b3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+    .mdl-style-list-footer label {
+        font-size: 14px;
+    }
+
+.movie-title {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
