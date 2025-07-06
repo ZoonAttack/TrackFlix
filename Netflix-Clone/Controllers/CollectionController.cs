@@ -35,18 +35,19 @@ namespace Netflix_Clone.Controllers
             return PartialView("GetShowDetailsPartial", model);
         }
 
-        public async Task<IActionResult> GetMoviesPage(string option = "")
+        public async Task<IActionResult> GetMoviesPage(int page = 1)
         {
+            string query = $"page={page}";
             MoviesPageViewModel model = new MoviesPageViewModel
             {
                 Genres = await _tmdbService.GetGenresAsync(),
-                Movies = await _tmdbService.GetMoviesAsync(option)
+                Movies = await _tmdbService.GetMoviesAsync(query)
             };
             return View("MoviesPage", model);
         }
         public async Task<IActionResult> GetShowsPage(int page = 1)
         {
-            string query = $"?page={page}";
+            string query = $"page={page}";
             ShowsPageViewModel model = new ShowsPageViewModel
             {
                 Genres = await _tmdbService.GetGenresAsync(),

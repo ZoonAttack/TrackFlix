@@ -6,8 +6,7 @@
 <link rel="stylesheet" href="~/css/ShowsPage.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/ajaxHandler.js"></script>
-<body>
-    <main class="main-content">
+<main class="main-content">
         <!-- Filtering Section -->
         <div id="filters">
             <label for="genre">Genre:</label>
@@ -20,10 +19,11 @@
 
             <label for="sort">Sort By:</label>
             <select id="sort" name="sort">
-                <option value="popularity">Popularity</option>
-                <option value="rating">Rating</option>
-                <option value="release">Release Date</option>
-                <option value="title">Title</option>
+                <option value="title.asc">Title(A-Z)</option>
+                <option value="title.desc">Title(Z-A)</option>
+                <option value="vote-average.desc">Rating</option>
+                <option value="popularity.asc">Popularity ASC</option>
+                <option value="popularity.desc">Popularity DESC</option>
             </select>
         </div>
 
@@ -47,5 +47,4 @@
                 }
             </ul>
         </nav>
-    </main>
-</body>
+</main>
