@@ -94,7 +94,8 @@ namespace Netflix_Clone.Controllers
                 UserId = user.Id,
                 AddedOn = DateTime.Now,
                 Status = model.Status,
-                Rating = model.Rating
+                Rating = model.Rating,
+                Note = model.Note
             };
             if(!result)
             {
@@ -123,7 +124,8 @@ namespace Netflix_Clone.Controllers
                 AddedOn = DateTime.Now,
                 Status = model.Status,
                 Rating = model.Rating,
-                EpisodesWatched = model.EpisodesWatched
+                EpisodesWatched = model.EpisodesWatched,
+                Note = model.Note
             };
             if (!result)
             {

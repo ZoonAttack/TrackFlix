@@ -16,4 +16,7 @@ public class UserShow
     public float Rating { get; set; }
     public int EpisodesWatched { get; set; }
 
+    public string Note { get; set; }
+
+
 }
