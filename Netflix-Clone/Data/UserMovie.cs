@@ -13,4 +13,6 @@ public class UserMovie
 
     public float Rating { get; set; }
 
+    public string Note { get; set; }
+
 }

@@ -13,4 +13,7 @@
         <button class="action-btn movie-add-list-btn" data-id="@Model.Id">
             <i class="fas fa-plus"></i> My List
         </button>
+        <a class="action-btn movie-data-btn" asp-action="GetMoviePage" asp-controller="Collection" asp-route-movieId =@Model.Id>
+            Details
+        </a>
     </div>

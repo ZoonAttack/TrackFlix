@@ -62,7 +62,15 @@
                                     <button class="delete-btn" title="Remove from list">❌</button>
                                 </td>
                                 <th align="center">@index</th>
-                                <td><span class="movie-title">@show.Title</span></td>
+                                <td>
+                                    <span class="movie-title">
+                                        <a asp-action="GetShowPage" 
+                                        asp-controller="Collection" 
+                                        asp-route-showId="@show.Id">
+                                            @show.Title
+                                        </a>
+                                    </span>
+                                </td>
                                 <td align="center">@season.SeasonNumber</td>
                                 <td align="center">@show.ReleaseDate</td>
                                 <td align="center">TV Show</td>
@@ -92,7 +100,15 @@
                                     <button class="delete-btn" title="Remove from list">❌</button>
                                 </td>
                                 <th align="center">@index</th>
-                                <td><span class="movie-title">@movie.Title</span></td>
+                                <td>
+                                    <span class="movie-title">
+                                        <a asp-action="GetMoviePage"
+                                           asp-controller="Collection"
+                                           asp-route-movieId="@movie.Id">
+                                            @movie.Title
+                                        </a>
+                                    </span>
+                                </td>
                                 <td align="center">None</td>
                                 <td align="center">@movie.ReleaseDate</td>
                                 <td align="center">Movie</td>

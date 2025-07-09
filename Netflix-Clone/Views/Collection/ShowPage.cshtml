@@ -1,0 +1,78 @@
+﻿@using Netflix_Clone.Models
+@using Netflix_Clone.Data
+@model CollectionItemPageViewModel<Show>;
+@{
+    Layout = "_CollectionLayout";
+    ViewData["Title"] = Model.CollectionItem.Title;
+}
+
+<link rel="stylesheet" href="~/css/CollectionItem.css" />
+
+<div class="media-wrapper">
+    <div class="media-card">
+        <img class="poster" src="@Model.CollectionItem.PosterURL" alt="@Model.CollectionItem.Title" />
+        <div class="info">
+            <h1 class="title">@Model.CollectionItem.Title</h1>
+            <p class="description">@Model.CollectionItem.Description</p>
+            <ul class="meta">
+                <li><strong>Release:</strong> @Model.CollectionItem.ReleaseDate</li>
+                <li><strong>Language:</strong> @Model.CollectionItem.Language</li>
+                <li><strong>Rating:</strong> @Model.CollectionItem.Rating</li>
+            </ul>
+            @if (Model.CollectionItem.Genres != null && Model.CollectionItem.Genres.Any())
+            {
+                <div class="genres">
+                    @foreach (var genre in Model.CollectionItem.Genres)
+                    {
+                        <span class="genre">@genre.Name</span>
+                    }
+                </div>
+            }
+            @if (Model.CollectionItem.Actors != null && Model.CollectionItem.Actors.Any())
+            {
+                <p class="actors"><strong>Actors:</strong> @string.Join(", ", Model.CollectionItem.Actors)</p>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="media-wrapper">
+    <div class="user-ratings">
+        <h4>User Ratings:</h4>
+        <ul>
+            @if (Model.UsersRating != null && Model.UsersRating.Any())
+            {
+                @foreach (var rating in Model.UsersRating)
+                {
+                    <li>@rating.Item1: @rating.Item2</li>
+                }
+            }
+            else
+            {
+                <li class="no-ratings">No ratings available.</li>
+            }
+        </ul>
+    </div>
+</div>
+
+@if (Model.CollectionItem.Seasons != null && Model.CollectionItem.Seasons.Any())
+{
+    <div class="season-wrapper">
+        <h2 class="seasons-heading">Seasons</h2>
+
+        @foreach (var season in Model.CollectionItem.Seasons)
+        {
+            <div class="season-card">
+                <img class="season-poster" src="@season.PosterURL" alt="@season.Title" />
+                <div class="season-info">
+                    <h4>@season.Title</h4>
+                    <p>@season.Description</p>
+                    <ul class="meta">
+                        <li><strong>Episodes:</strong> @season.EpisodesCount</li>
+                        <li><strong>Release:</strong> @season.ReleaseDate</li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+}

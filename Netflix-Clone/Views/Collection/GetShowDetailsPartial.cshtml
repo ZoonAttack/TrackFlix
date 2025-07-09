@@ -16,4 +16,7 @@
     <button class="action-btn show-add-list-btn" data-id="@Model.Id">
         <i class="fas fa-plus"></i> My List
     </button>
+    <a class="action-btn show-data-btn" asp-action="GetShowPage" asp-controller="Collection" asp-route-showId=@Model.Id>
+        Details
+    </a>
 </div>

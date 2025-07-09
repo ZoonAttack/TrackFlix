@@ -1,4 +1,5 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Netflix_Clone.Data;
 using Netflix_Clone.Models;
 
@@ -7,10 +8,11 @@ namespace Netflix_Clone.Controllers
     public class CollectionController : Controller
     {
         private readonly TMDBService _tmdbService;
-
-        public CollectionController(TMDBService tmdbService)
+        private readonly ApplicationDbContext _dbContext;
+        public CollectionController(TMDBService tmdbService, ApplicationDbContext dbContext)
         {
             _tmdbService = tmdbService;
+            _dbContext = dbContext;
         }
 
         public async Task<IActionResult> Index()
@@ -80,10 +82,45 @@ namespace Netflix_Clone.Controllers
             return PartialView("AddShowToListPartial", model);
         }
 
-        //public async Task<IActionResult> AddedToList()
-        //{
+        public async Task<IActionResult> GetMoviePage(int movieId)
+        {
+            List<UserMovie> usersWithRating = _dbContext.UserMovies.Where(um => um.MovieId == movieId && um.Rating != 0.0).Include(u => u.User).ToList();
 
-        //}
+            List<Tuple<string, float>> userRatings = new();
+            foreach (var user in usersWithRating)
+            {
+                //Get names and ratings for that movie
+                userRatings.Add(Tuple.Create(user.User.UserName, user.Rating)!);
+            }
+            
+
+            CollectionItemPageViewModel<Movie> model = new CollectionItemPageViewModel<Movie>
+            {
+                CollectionItem = await _tmdbService.GetMovie(movieId),
+                UsersRating = userRatings
+            };
+            return View("MoviePage", model);
+        }
+
+        public async Task<IActionResult> GetShowPage(int showId)
+        {
+            List<UserShow> usersWithRating = _dbContext.UserShows.Where(um => um.ShowId == showId && um.Rating != 0.0).Include(u => u.User).ToList();
+
+            List<Tuple<string, float>> userRatings = new();
+            foreach (var user in usersWithRating)
+            {
+                //Get names and ratings for that movie
+                userRatings.Add(Tuple.Create(user.User.UserName, user.Rating)!);
+            }
+
+
+            CollectionItemPageViewModel<Show> model = new CollectionItemPageViewModel<Show>
+            {
+                CollectionItem = await _tmdbService.GetShow(showId),
+                UsersRating = userRatings
+            };
+            return View("ShowPage", model);
+        }
 
         //public async Task<IActionResult> FilterMovies()
         //{
