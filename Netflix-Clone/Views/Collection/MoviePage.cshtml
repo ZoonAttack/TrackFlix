@@ -6,23 +6,52 @@
     Layout = "_CollectionLayout";
     ViewData["Title"] = @Model.CollectionItem.Title;
 }
-<div id="movie">
 
-    <div id="movie-details-modal">
-        <div id="movie">
-            <div class="card" data-movie-id="@Model.CollectionItem.Id">
-                <img src="@Model.CollectionItem.PosterURL" alt="@Model.CollectionItem.Title" />
-                <div class="card-title">@Model.CollectionItem.Title</div>
-            </div>
-        </div>
+<link rel="stylesheet" href="~/css/CollectionItem.css" />
 
-        <div id="ratings">
-            @foreach(var rating in @Model.UsersRating)
+<div class="media-wrapper">
+    <div class="media-card">
+        <img class="poster" src="@Model.CollectionItem.PosterURL" alt="@Model.CollectionItem.Title" />
+        <div class="info">
+            <h1 class="title">@Model.CollectionItem.Title</h1>
+            <p class="description">@Model.CollectionItem.Description</p>
+            <ul class="meta">
+                <li><strong>Release:</strong> @Model.CollectionItem.ReleaseDate</li>
+                <li><strong>Language:</strong> @Model.CollectionItem.Language</li>
+                <li><strong>Rating:</strong> @Model.CollectionItem.Rating</li>
+            </ul>
+            @if (Model.CollectionItem.Genres != null && Model.CollectionItem.Genres.Any())
             {
-                <!--Username  ->  Rating(float) -->
+                <div class="genres">
+                    @foreach (var genre in Model.CollectionItem.Genres)
+                    {
+                        <span class="genre">@genre.Name</span>
+                    }
+                </div>
+            }
+            @if (Model.CollectionItem.Actors != null && Model.CollectionItem.Actors.Any())
+            {
+                <p class="actors"><strong>Actors:</strong> @string.Join(", ", Model.CollectionItem.Actors)</p>
             }
         </div>
-	</div>
+    </div>
+</div>
 
-
+<div class="media-wrapper">
+    <div class="user-ratings">
+        <h4>User Ratings:</h4>
+        <ul>
+            @if (Model.UsersRating != null && Model.UsersRating.Any())
+            {
+                @foreach (var rating in Model.UsersRating)
+                {
+                    <li>@rating.Item1: @rating.Item2</li>
+                }
+            }
+            else
+            {
+                <li class="no-ratings">No ratings available.</li>
+            }
+        </ul>
+    </div>
 </div>
