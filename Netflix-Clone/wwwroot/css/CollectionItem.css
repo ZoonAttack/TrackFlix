@@ -1,0 +1,224 @@
+﻿/* Reset & Base Styling */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #141414;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #fff;
+}
+
+/* Centering wrapper */
+.media-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+}
+
+/* Main card centered */
+.media-card {
+    display: flex;
+    flex-direction: row-reverse; /* poster on right */
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
+    background-color: #1f1f1f;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    gap: 2.5rem;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Poster to right */
+.poster {
+    width: 320px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Info to left */
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Title */
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+    text-align: left;
+}
+
+/* Description */
+.description {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Metadata */
+.meta {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    font-size: 1rem;
+    color: #aaa;
+}
+
+/* Genres */
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.genre {
+    padding: 0.4rem 0.8rem;
+    background-color: #333;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+/* Actors */
+.actors {
+    font-size: 1rem;
+    color: #aaa;
+}
+
+/* Ratings */
+.user-ratings h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-ratings ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-ratings li {
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.no-ratings {
+    font-size: 0.95rem;
+    color: #777;
+}
+
+/* Seasons Section */
+.season-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto 0;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.seasons-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-align: left;
+}
+
+.season-card {
+    display: flex;
+    gap: 1.5rem;
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.season-poster {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.season-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: #ddd;
+}
+
+    .season-info h4 {
+        font-size: 1.2rem;
+        color: #fff;
+        margin: 0;
+    }
+
+    .season-info p {
+        font-size: 0.95rem;
+        color: #ccc;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .season-info .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9rem;
+        color: #aaa;
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .media-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .poster {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .info {
+        width: 100%;
+        padding-top: 1rem;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .season-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .season-poster {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .season-info {
+        align-items: center;
+    }
+}
