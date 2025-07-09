@@ -150,3 +150,30 @@ nav.navbar {
         color: #fff;
         font-weight: 500;
     }
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #e50914;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+    .delete-btn:hover {
+        opacity: 0.8;
+    }
+
+.progress-btn {
+    background-color: #333;
+    border: none;
+    color: white;
+    padding: 2px 8px;
+    margin: 0 5px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .progress-btn:hover {
+        background-color: #444;
+    }
