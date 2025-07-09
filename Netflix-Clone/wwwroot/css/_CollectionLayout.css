@@ -172,3 +172,10 @@
     .brand-link:hover {
         text-decoration: underline;
     }
+#add-to-list-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    width: 100%;
+}

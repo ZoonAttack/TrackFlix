@@ -43,7 +43,8 @@ namespace Netflix_Clone.Controllers
             MoviesPageViewModel model = new MoviesPageViewModel
             {
                 Genres = await _tmdbService.GetGenresAsync(),
-                Movies = await _tmdbService.GetMoviesAsync(query)
+                Movies = await _tmdbService.GetMoviesAsync(query),
+                Page = page
             };
             return View("MoviesPage", model);
         }
@@ -53,7 +54,8 @@ namespace Netflix_Clone.Controllers
             ShowsPageViewModel model = new ShowsPageViewModel
             {
                 Genres = await _tmdbService.GetGenresAsync(),
-                Shows = await _tmdbService.GetShowsAsync(query)
+                Shows = await _tmdbService.GetShowsAsync(query),
+                Page = page
             };
             return View("ShowsPage", model);
         }

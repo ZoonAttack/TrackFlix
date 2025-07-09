@@ -11,8 +11,10 @@ namespace Netflix_Clone.Models
         public List<Movie> Movies { get; set; }
 
         //Filtering 
-        public int GenreId { get; set; }
+        //public string Genre { get; set; }
 
-        public string SortBy { get; set; }
+        //public string SortBy { get; set; }
+
+        public int Page { get; set; }
     }
 }

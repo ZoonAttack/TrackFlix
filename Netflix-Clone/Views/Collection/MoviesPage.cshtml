@@ -10,12 +10,12 @@
 <script src="~/js/ajaxHandler.js"></script>
 <main class="main-content">
         <!-- Filtering Section -->
-        <div id="filters">
+        @* <div id="filters">
             <label for="genre">Genre:</label>
             <select id="genre" name="genre">
 				@foreach (var genre in Model.Genres)
 				{
-					<option value="@genre.Id">@genre.Name</option>
+					<option value="@genre.Name">@genre.Name</option>
 				})
             </select>
 
@@ -27,7 +27,7 @@
                 <option value="popularity.asc">Popularity ASC</option>
                 <option value="popularity.desc">Popularity DESC</option>
             </select>
-        </div>
+        </div> *@
 
         <!-- Movie Cards Section -->
         <div id="movies">

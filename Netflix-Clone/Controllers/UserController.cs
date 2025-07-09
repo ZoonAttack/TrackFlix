@@ -29,10 +29,10 @@ namespace Netflix_Clone.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserLoginModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(UserLoginModel model, string ReturnUrl = null)
         {
             User? user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == model.Email);
-            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["ReturnUrl"] = ReturnUrl;
 
             if (!ModelState.IsValid)
             {
@@ -46,6 +46,7 @@ namespace Netflix_Clone.Controllers
 
             if (result.Succeeded)
             {
+                if(!string.IsNullOrEmpty(ReturnUrl)) return Redirect(ReturnUrl);
                 return RedirectToAction("Index", "Collection");
             }
 
