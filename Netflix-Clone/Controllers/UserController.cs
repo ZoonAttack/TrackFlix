@@ -148,53 +148,57 @@ namespace Netflix_Clone.Controllers
             };
             return View("MyListPage", model);
         }
+
+        private async Task<UserListModel<UserShow, Show>> GetListShows()
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task<UserListModel<UserMovie, Movie>> GetListMovies()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
-        #region Helper Methods
-        public async Task<UserListModel<UserMovie, Movie>> GetListMovies()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteFromList([FromBody] DeleteItemDto request)
         {
-            //Get User Movies
-            List<UserMovie> userMovies = await _dbContext.UserMovies.Where(um => um.UserId == _userManager.GetUserId(User)).ToListAsync();
-            List<Movie> movies = new List<Movie>();
+            var userId = _userManager.GetUserId(User);
 
-            foreach(int movieId in userMovies.Select(um => um.MovieId))
+            if (request.Type == "movie" && request.MovieId.HasValue)
             {
-                Movie movie = await _tmdbService.GetMovie(movieId);
-                if (movie != null)
-                {
-                    movies.Add(movie);
-                }
-            }
-            return new UserListModel<UserMovie, Movie>
-            {
-                ListData = userMovies,
-                CollectionData = movies
-            };
-        }
-        public async Task<UserListModel<UserShow, Show>> GetListShows()
-        {
-            //Get User Movies
-            List<UserShow> userShows = await _dbContext.UserShows.Where(um => um.UserId == _userManager.GetUserId(User)).ToListAsync();
-            List<Show> shows = new List<Show>();
+                var userMovie = await _dbContext.UserMovies
+                    .FirstOrDefaultAsync(m => m.MovieId == request.MovieId.Value && m.UserId == userId);
 
-            foreach (int showId in userShows.Select(um => um.ShowId))
-            {
-                Show show = await _tmdbService.GetShow(showId);
-                if (show != null)
-                {
-                    shows.Add(show);
-                }
+                if (userMovie == null) return NotFound();
+
+                _dbContext.UserMovies.Remove(userMovie);
             }
-            return new UserListModel<UserShow, Show>
+            else if (request.Type == "show" && request.ShowId.HasValue && request.SeasonId.HasValue)
             {
-                ListData = userShows,
-                CollectionData = shows
-            };
+                var userShow = await _dbContext.UserShows
+                    .FirstOrDefaultAsync(s => s.ShowId == request.ShowId.Value
+                                           && s.SeasonId == request.SeasonId.Value
+                                           && s.UserId == userId);
+
+                if (userShow == null) return NotFound();
+
+                _dbContext.UserShows.Remove(userShow);
+            }
+            else
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            await _dbContext.SaveChangesAsync();
+            return Ok();
         }
-        #endregion
+
+
     }
 }

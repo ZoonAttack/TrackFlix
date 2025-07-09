@@ -51,10 +51,16 @@
                     {
                         var userShow = Model.Shows.ListData[i];
                         var show = Model.Shows.CollectionData.FirstOrDefault(s => s.Id == userShow.ShowId);
-						var season = show?.Seasons.FirstOrDefault(se => se.Id == userShow.SeasonId);
+                        var season = show?.Seasons.FirstOrDefault(se => se.Id == userShow.SeasonId);
                         if (show != null)
                         {
-                            <tr class="@(index % 2 == 0 ? "td2" : "td1")" data-status="@userShow.Status">
+                            <tr class="@(index % 2 == 0 ? "td2" : "td1")"
+                                data-status="@userShow.Status"
+                                data-type="show"
+                                data-id="@userShow.ShowId">
+                                <td>
+                                    <button class="delete-btn" title="Remove from list">❌</button>
+                                </td>
                                 <th align="center">@index</th>
                                 <td>
                                     <span class="movie-title">
@@ -69,7 +75,11 @@
                                 <td align="center">@show.ReleaseDate</td>
                                 <td align="center">TV Show</td>
                                 <td align="center"><span class="score">@userShow.Rating</span></td>
-                                <td align="center">@userShow.EpisodesWatched / @season.EpisodesCount</td>
+                                <td align="center">
+                                    <button class="progress-btn">-</button>
+                                    @userShow.EpisodesWatched / @season.EpisodesCount
+                                    <button class="progress-btn">+</button>
+                                </td>
                             </tr>
                             index++;
                         }
@@ -82,7 +92,13 @@
                         var movie = Model.Movies.CollectionData.FirstOrDefault(m => m.Id == userMovie.MovieId);
                         if (movie != null)
                         {
-                            <tr class="@(index % 2 == 0 ? "td2" : "td1")" data-status="@userMovie.Status">
+                            <tr class="@(index % 2 == 0 ? "td2" : "td1")"
+                                data-status="@userMovie.Status"
+                                data-type="movie"
+                                data-id="@userMovie.MovieId">
+                                <td>
+                                    <button class="delete-btn" title="Remove from list">❌</button>
+                                </td>
                                 <th align="center">@index</th>
                                 <td>
                                     <span class="movie-title">
@@ -97,7 +113,11 @@
                                 <td align="center">@movie.ReleaseDate</td>
                                 <td align="center">Movie</td>
                                 <td align="center"><span class="score">@userMovie.Rating</span></td>
-                                <td align="center">1 / 1</td>
+                                <td align="center">
+                                    <button class="progress-btn">-</button>
+                                    1 / 1
+                                    <button class="progress-btn">+</button>
+                                </td>
                             </tr>
                             index++;
                         }
@@ -140,5 +160,47 @@
             title.textContent = statusTitleMap[status] || 'My List';
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    const type = row.getAttribute('data-type');
+
+                    let payload = { type: type };
+
+                    if (type === 'show') {
+                        payload.showId = parseInt(row.getAttribute('data-showid'));
+                        payload.seasonId = parseInt(row.getAttribute('data-seasonid'));
+                    } else if (type === 'movie') {
+                        payload.movieId = parseInt(row.getAttribute('data-movieid'));
+                    }
+
+                    if (!confirm("Are you sure you want to remove this from your list?")) return;
+
+                    fetch('/User/DeleteFromList', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            row.remove(); // حذف الصف من الجدول
+                        } else {
+                            alert("Failed to delete item.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error deleting item:", error);
+                        alert("An error occurred.");
+                    });
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
