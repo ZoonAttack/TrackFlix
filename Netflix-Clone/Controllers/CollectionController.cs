@@ -122,6 +122,23 @@ namespace Netflix_Clone.Controllers
             return View("ShowPage", model);
         }
 
+        public async Task<IActionResult> Search(string query, int page = 1)
+        {
+            //1-Get all movie results
+            List<Movie> movies = await _tmdbService.SearchMovies(query, page);
+            //2-Get all show results
+            List<Show> shows = await _tmdbService.SearchShows(query, page);
+            //3-Put them in one View Model
+            SearchViewModel model = new SearchViewModel
+            {
+                Movies = movies,
+                Shows = shows,
+                Query = query
+            };
+            //4-Return that model to a new "SearchPage" view with pages and all
+            return View("SearchPage", model);
+        }
+
         //public async Task<IActionResult> FilterMovies()
         //{
         //    // Implement filtering logic here

@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_CollectionLayout";
+	ViewData["Title"] = "TrackFlix - Search Results";
+	ViewData["Description"] = "Explore search results for movies and shows on TrackFlix. Find your favorite content quickly and easily.";
+}
+@using Netflix_Clone.Data
+@model SearchViewModel
+
+<link rel="stylesheet" href="~/css/SearchPage.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/ajaxHandler.js"></script>
+
+<main class="main-content">
+    <!-- Item Cards Section -->
+    <div id="item">
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="card" data-movie-id="@movie.Id">
+                <img src="@movie.PosterURL" alt="@movie.Title" />
+                <div class="card-title">@movie.Title</div>
+            </div>
+        }
+
+        @foreach (var show in Model.Shows)
+        {
+            <div class="card" data-show-id="@show.Id">
+                <img src="@show.PosterURL" alt="@show.Title" />
+                <div class="card-title">@show.Title</div>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination Section -->
+    <nav aria-label="pagination">
+        <ul class="pagination">
+            @for (int i = 1; i <= 10; i++)
+            {
+                <li>
+                    <a asp-action="Search"
+                       asp-controller="Collection"
+                       asp-route-query="@Model.Query"
+                       asp-route-page="@i">
+                        <span class="visuallyhidden">page </span>@i
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</main>

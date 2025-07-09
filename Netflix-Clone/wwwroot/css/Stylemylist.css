@@ -151,29 +151,55 @@ nav.navbar {
         font-weight: 500;
     }
 
+/* Smooth transition for all buttons */
+button {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Delete Button */
 .delete-btn {
-    background: none;
+    background-color: #2c2c2c;
     border: none;
-    color: #e50914;
-    font-size: 1.2rem;
+    color: #ff4d4d;
+    font-size: 1rem;
+    padding: 6px 10px;
+    border-radius: 50%;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
     .delete-btn:hover {
-        opacity: 0.8;
+        background-color: #ff4d4d;
+        color: #fff;
+        transform: scale(1.1);
     }
 
+    .delete-btn:active {
+        transform: scale(0.95);
+    }
+
+/* Progress Buttons (+ / -) */
 .progress-btn {
-    background-color: #333;
+    background-color: #2c2c2c;
     border: none;
-    color: white;
-    padding: 2px 8px;
-    margin: 0 5px;
-    font-weight: bold;
-    border-radius: 4px;
+    color: #eee;
+    font-size: 0.95rem;
+    padding: 4px 10px;
+    margin: 0 6px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
 }
 
     .progress-btn:hover {
         background-color: #444;
+        transform: scale(1.1);
     }
+
+    .progress-btn:active {
+        transform: scale(0.95);
+    }
+

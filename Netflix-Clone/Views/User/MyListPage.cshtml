@@ -40,6 +40,7 @@
                     <th width="85" class="mdl-style-thead-type text-center hidden-sm-down">Type</th>
                     <th width="110" class="mdl-style-thead-score text-center">Score</th>
                     <th width="105" class="mdl-style-thead-progress text-center">Progress</th>
+                    <th width="105" class="mdl-style-thead-progress text-center">Progress</th>
                 </tr>
             </thead>
             <tbody id="content_2_0">
@@ -57,7 +58,8 @@
                             <tr class="@(index % 2 == 0 ? "td2" : "td1")"
                                 data-status="@userShow.Status"
                                 data-type="show"
-                                data-id="@userShow.ShowId">
+                                data-ShowId="@userShow.ShowId"
+                                data-SeasonId="@userShow.SeasonId">
                                 <td>
                                     <button class="delete-btn" title="Remove from list">❌</button>
                                 </td>
@@ -94,8 +96,8 @@
                         {
                             <tr class="@(index % 2 == 0 ? "td2" : "td1")"
                                 data-status="@userMovie.Status"
-                                data-type="movie"
-                                data-id="@userMovie.MovieId">
+                                data-Type="movie"
+                                data-MovieId="@userMovie.MovieId">
                                 <td>
                                     <button class="delete-btn" title="Remove from list">❌</button>
                                 </td>
@@ -114,9 +116,7 @@
                                 <td align="center">Movie</td>
                                 <td align="center"><span class="score">@userMovie.Rating</span></td>
                                 <td align="center">
-                                    <button class="progress-btn">-</button>
                                     1 / 1
-                                    <button class="progress-btn">+</button>
                                 </td>
                             </tr>
                             index++;
@@ -170,25 +170,24 @@
                     let payload = { type: type };
 
                     if (type === 'show') {
-                        payload.showId = parseInt(row.getAttribute('data-showid'));
-                        payload.seasonId = parseInt(row.getAttribute('data-seasonid'));
+                        payload.showId = parseInt(row.getAttribute('data-ShowID'));
+                        payload.seasonId = parseInt(row.getAttribute('data-SeasonId'));
                     } else if (type === 'movie') {
-                        payload.movieId = parseInt(row.getAttribute('data-movieid'));
+                        payload.movieId = parseInt(row.getAttribute('data-MovieId'));
                     }
 
                     if (!confirm("Are you sure you want to remove this from your list?")) return;
-
+                    console.log(payload);
                     fetch('/User/DeleteFromList', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(payload)
                     })
                     .then(response => {
                         if (response.ok) {
-                            row.remove(); // حذف الصف من الجدول
+                            row.remove(); 
                         } else {
                             alert("Failed to delete item.");
                         }

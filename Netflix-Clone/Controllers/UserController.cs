@@ -25,7 +25,7 @@ namespace Netflix_Clone.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("GetMyListPage");
         }
 
         [HttpPost]
@@ -149,23 +149,12 @@ namespace Netflix_Clone.Controllers
             return View("MyListPage", model);
         }
 
-        private async Task<UserListModel<UserShow, Show>> GetListShows()
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task<UserListModel<UserMovie, Movie>> GetListMovies()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteFromList([FromBody] DeleteItemDto request)
         {
             var userId = _userManager.GetUserId(User);
@@ -199,6 +188,47 @@ namespace Netflix_Clone.Controllers
             return Ok();
         }
 
+        #region Helper Methods
+        public async Task<UserListModel<UserMovie, Movie>> GetListMovies()
+        {
+            //Get User Movies
+            List<UserMovie> userMovies = await _dbContext.UserMovies.Where(um => um.UserId == _userManager.GetUserId(User)).ToListAsync();
+            List<Movie> movies = new List<Movie>();
 
+            foreach (int movieId in userMovies.Select(um => um.MovieId))
+            {
+                Movie movie = await _tmdbService.GetMovie(movieId);
+                if (movie != null)
+                {
+                    movies.Add(movie);
+                }
+            }
+            return new UserListModel<UserMovie, Movie>
+            {
+                ListData = userMovies,
+                CollectionData = movies
+            };
+        }
+        public async Task<UserListModel<UserShow, Show>> GetListShows()
+        {
+            //Get User Movies
+            List<UserShow> userShows = await _dbContext.UserShows.Where(um => um.UserId == _userManager.GetUserId(User)).ToListAsync();
+            List<Show> shows = new List<Show>();
+
+            foreach (int showId in userShows.Select(um => um.ShowId))
+            {
+                Show show = await _tmdbService.GetShow(showId);
+                if (show != null)
+                {
+                    shows.Add(show);
+                }
+            }
+            return new UserListModel<UserShow, Show>
+            {
+                ListData = userShows,
+                CollectionData = shows
+            };
+        }
+        #endregion
     }
 }

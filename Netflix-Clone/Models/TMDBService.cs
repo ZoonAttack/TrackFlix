@@ -69,6 +69,31 @@ namespace Netflix_Clone.Models
             return tmdbResponse?.Results.Select(dto => dto.ToShow()).ToList() ?? new List<Show>();
         }
 
+        public async Task<List<Movie>> SearchMovies(string query, int page = 1)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/search/movie?api_key={_apiKey}&query={Uri.EscapeDataString(query)}&page={page}");
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            var tmdbResponse = JsonSerializer.Deserialize<TMDBResponse<TMDBMovieDto>>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
+            return tmdbResponse?.Results.Select(dto => dto.ToMovie()).ToList() ?? new List<Movie>();
+
+        }
+
+        public async Task<List<Show>> SearchShows(string query, int page = 1)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/search/tv?api_key={_apiKey}&query={Uri.EscapeDataString(query)}&page={page}");
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            var tmdbResponse = JsonSerializer.Deserialize<TMDBResponse<TMDBShowDto>>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
+            return tmdbResponse?.Results.Select(dto => dto.ToShow()).ToList() ?? new List<Show>();
+
+        }
         public async Task<List<Movie>> GetMoviesAsync(string options)
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}/discover/movie?api_key={_apiKey}&{options}");
