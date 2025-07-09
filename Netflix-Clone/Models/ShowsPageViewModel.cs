@@ -15,6 +15,6 @@ namespace Netflix_Clone.Models
 
         //public string Sort { get; set; }
 
-        //public int Page { get; set; }
+        public int Page { get; set; }
     }
 }
