@@ -25,7 +25,7 @@ namespace Netflix_Clone.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("GetMyListPage");
         }
 
         [HttpPost]

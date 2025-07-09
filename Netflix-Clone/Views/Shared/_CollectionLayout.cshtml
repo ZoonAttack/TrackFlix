@@ -19,14 +19,16 @@
                 <a asp-action="GetShowsPage" asp-controller="Collection">Shows</a>
                 <a asp-action="GetMyListPage" asp-controller="User">My List</a>
             </div>
-            <div class="navbar-right">
-                <form asp-action="Search" asp-controller="Collection" method="get" class="search-form">
+            @if (!ViewData["Title"]!.Equals("My List"))
+            {
+                <div class="navbar-right">
+                    <form asp-action="Search" asp-controller="Collection" method="get" class="search-form">
                     <input type="text" name="query" placeholder="Search..." />
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <img src="https://i.pravatar.cc/32" alt="User Icon" />
-            </div>
-
+                </div>
+            }
         </nav>
         @RenderBody()
     </div>
