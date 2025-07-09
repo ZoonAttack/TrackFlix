@@ -129,11 +129,8 @@
 
     <!-- List Footer -->
     <div class="mdl-style-list-footer box-footer b-t list-statistics">
-        <label class="mdl-style-dramas"><span class="name">Dramas</span><span class="cnt">19</span></label>
-        <label class="mdl-style-tvshows"><span class="name">TV Shows</span><span class="cnt">0</span></label>
-        <label class="mdl-style-episodes"><span class="name">Episodes</span><span class="cnt">235</span></label>
-        <label class="mdl-style-movies"><span class="name">Movies</span><span class="cnt">7</span></label>
-        <label class="mdl-style-days"><span class="name">Days</span><span class="cnt">11.2</span></label>
+        <label class="mdl-style-tvshows"><span class="name">TV Shows</span><span class="cnt">@Model.Shows.ListData.Count</span></label>
+        <label class="mdl-style-movies"><span class="name">Movies</span><span class="cnt">@Model.Movies.ListData.Count</span></label>
     </div>
 
     <!-- Filtering Script -->
