@@ -33,16 +33,18 @@
         <table id="list_2" class="mdl-style-table table table-striped m-b-0">
             <thead class="primary">
                 <tr>
+                    <th width="30" class="mdl-style-thead-Delete text-center hidden-sm-down"></th>
                     <th width="30" class="mdl-style-thead-num text-center hidden-sm-down">#</th>
                     <th width="300" class="mdl-style-thead-title left">Title</th>
                     <th width="110" class="mdl-style-thead-season text-center">Season</th>
                     <th width="85" class="mdl-style-thead-year text-center hidden-sm-down">Release Date</th>
                     <th width="85" class="mdl-style-thead-type text-center hidden-sm-down">Type</th>
-                    <th width="110" class="mdl-style-thead-score text-center">Score</th>
+                    <th width="110" class="mdl-style-thead-score text-center">Rating</th>
                     <th width="105" class="mdl-style-thead-progress text-center">Progress</th>
-                    <th width="105" class="mdl-style-thead-progress text-center">Progress</th>
+                    <th width="110" class="mdl-style-thead-status text-center">Status</th>
                 </tr>
             </thead>
+
             <tbody id="content_2_0">
                 @{
                     int index = 1;
@@ -60,7 +62,7 @@
                                 data-type="show"
                                 data-ShowId="@userShow.ShowId"
                                 data-SeasonId="@userShow.SeasonId">
-                                <td>
+                                <td align="center">
                                     <button class="delete-btn" title="Remove from list">❌</button>
                                 </td>
                                 <th align="center">@index</th>
@@ -77,11 +79,21 @@
                                 <td align="center">@show.ReleaseDate</td>
                                 <td align="center">TV Show</td>
                                 <td align="center"><span class="score">@userShow.Rating</span></td>
-                                <td align="center">
-                                    <button class="progress-btn">-</button>
-                                    @userShow.EpisodesWatched / @season.EpisodesCount
-                                    <button class="progress-btn">+</button>
-                                </td>
+                                @if(userShow.EpisodesWatched != season.EpisodesCount)
+                                {
+                                    <td align="center">
+                                        <a asp-action="UpdateSeasonProgress" asp-controller="User" asp-route-option="decrease" asp-route-showId=@userShow.ShowId asp-route-seasonId=@userShow.SeasonId asp-route-episodesCount=@season.EpisodesCount class="progress-btn">-</a>
+                                        @userShow.EpisodesWatched / @season.EpisodesCount
+                                        <a asp-action="UpdateSeasonProgress" asp-controller="User" asp-route-option="increase" asp-route-showId=@userShow.ShowId asp-route-seasonId=@userShow.SeasonId asp-route-episodesCount=@season.EpisodesCount class="progress-btn">+</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td align="center">
+                                        @userShow.EpisodesWatched / @season.EpisodesCount
+                                    </td>
+                                }
+                                <td align="center">@userShow.Status</td>
                             </tr>
                             index++;
                         }
@@ -98,7 +110,7 @@
                                 data-status="@userMovie.Status"
                                 data-Type="movie"
                                 data-MovieId="@userMovie.MovieId">
-                                <td>
+                                <td align="center">
                                     <button class="delete-btn" title="Remove from list">❌</button>
                                 </td>
                                 <th align="center">@index</th>
@@ -118,6 +130,8 @@
                                 <td align="center">
                                     1 / 1
                                 </td>
+                                <td align="center">@userMovie.Status</td>
+
                             </tr>
                             index++;
                         }
@@ -197,6 +211,5 @@
             });
         });
     </script>
-
 </body>
 </html>

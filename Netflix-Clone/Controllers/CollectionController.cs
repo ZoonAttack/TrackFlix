@@ -87,12 +87,11 @@ namespace Netflix_Clone.Controllers
         public async Task<IActionResult> GetMoviePage(int movieId)
         {
             List<UserMovie> usersWithRating = _dbContext.UserMovies.Where(um => um.MovieId == movieId && um.Rating != 0.0).Include(u => u.User).ToList();
-
-            List<Tuple<string, float>> userRatings = new();
+            List<Tuple<string, float, string>> userRatings = new();
             foreach (var user in usersWithRating)
             {
                 //Get names and ratings for that movie
-                userRatings.Add(Tuple.Create(user.User.UserName, user.Rating)!);
+                userRatings.Add(Tuple.Create(user.User.UserName, user.Rating, user.Note)!);
             }
             
 
@@ -108,11 +107,11 @@ namespace Netflix_Clone.Controllers
         {
             List<UserShow> usersWithRating = _dbContext.UserShows.Where(um => um.ShowId == showId && um.Rating != 0.0).Include(u => u.User).ToList();
 
-            List<Tuple<string, float>> userRatings = new();
+            List<Tuple<string, float, string>> userRatings = new();
             foreach (var user in usersWithRating)
             {
                 //Get names and ratings for that movie
-                userRatings.Add(Tuple.Create(user.User.UserName, user.Rating)!);
+                userRatings.Add(Tuple.Create(user.User.UserName, user.Rating, user.Note)!);
             }
 
 

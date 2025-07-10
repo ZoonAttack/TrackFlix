@@ -257,6 +257,9 @@ namespace Netflix_Clone.Migrations
                     b.Property<int>("ShowId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
@@ -264,19 +267,15 @@ namespace Netflix_Clone.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
-                    b.Property<int>("SeasonId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "ShowId");
+                    b.HasKey("UserId", "ShowId", "SeasonId");
 
                     b.ToTable("UserShows");
                 });

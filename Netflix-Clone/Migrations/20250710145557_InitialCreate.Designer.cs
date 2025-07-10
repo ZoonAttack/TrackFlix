@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Netflix_Clone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250702230825_InitialCreate")]
+    [Migration("20250710145557_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -237,6 +237,10 @@ namespace Netflix_Clone.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
@@ -256,22 +260,25 @@ namespace Netflix_Clone.Migrations
                     b.Property<int>("ShowId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EpisodesWatched")
                         .HasColumnType("int");
 
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Rating")
                         .HasColumnType("real");
-
-                    b.Property<int>("SeasonId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "ShowId");
+                    b.HasKey("UserId", "ShowId", "SeasonId");
 
                     b.ToTable("UserShows");
                 });

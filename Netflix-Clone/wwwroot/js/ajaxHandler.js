@@ -1,5 +1,4 @@
-﻿// Handles movie card click -> loads movie partial
-$(document).on('click', '.card[data-movie-id]', function () {
+﻿$(document).on('click', '.card[data-movie-id]', function () {
     var movieId = $(this).data('movie-id');
 
     $.ajax({
@@ -96,7 +95,6 @@ $(document).on('submit', '#show-add-to-list-form', function (e) {
         });
 });
 
-// Handles show card click -> loads show partial
 $(document).on('click', '.card[data-show-id]', function () {
     var showId = $(this).data('show-id');
 
@@ -177,7 +175,6 @@ $(document).on('click', '#add-to-list-modal .modal-close, #add-to-list-modal.mod
 });
 
 
-// Close show modal
 $(document).on('click', '#show-details-modal .modal-close, #show-details-modal.modal-overlay', function (e) {
     if ($(e.target).is('.modal-close') || $(e.target).is('.modal-overlay')) {
         closeShowModal();

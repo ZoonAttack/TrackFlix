@@ -6,6 +6,6 @@ namespace Netflix_Clone.Models
     {
         public T CollectionItem { get; set; }
 
-        public List<Tuple<string, float>> UsersRating { get; set; }
+        public List<Tuple<string, float, string>> UsersRating { get; set; }
     }
 }

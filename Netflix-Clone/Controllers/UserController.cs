@@ -150,11 +150,21 @@ namespace Netflix_Clone.Controllers
             return View("MyListPage", model);
         }
 
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> UpdateSeasonProgress(string option, int showId, int seasonId, int episodesCount)
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+
+            var userShow = _dbContext.UserShows.SingleOrDefault(x => x.ShowId == showId && x.SeasonId == seasonId);
+            if (userShow == null) return BadRequest();
+
+            if (option == "increase")
+                userShow.EpisodesWatched += 1;
+            else userShow.EpisodesWatched -= 1;
+
+            if (userShow.EpisodesWatched == episodesCount) userShow.Status = Data.Utility.WatchStatus.COMPLETED;
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("GetMyListPage");
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteFromList([FromBody] DeleteItemDto request)
         {
@@ -188,6 +198,13 @@ namespace Netflix_Clone.Controllers
             await _dbContext.SaveChangesAsync();
             return Ok();
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
 
         #region Helper Methods
         public async Task<UserListModel<UserMovie, Movie>> GetListMovies()

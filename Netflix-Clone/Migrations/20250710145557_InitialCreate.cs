@@ -164,7 +164,8 @@ namespace Netflix_Clone.Migrations
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Rating = table.Column<float>(type: "real", nullable: false)
+                    Rating = table.Column<float>(type: "real", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,12 +187,13 @@ namespace Netflix_Clone.Migrations
                     SeasonId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Rating = table.Column<float>(type: "real", nullable: false),
-                    EpisodesWatched = table.Column<int>(type: "int", nullable: false)
+                    Rating = table.Column<float>(type: "real", nullable: true),
+                    EpisodesWatched = table.Column<int>(type: "int", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserShows", x => new { x.UserId, x.ShowId });
+                    table.PrimaryKey("PK_UserShows", x => new { x.UserId, x.ShowId, x.SeasonId });
                     table.ForeignKey(
                         name: "FK_UserShows_AspNetUsers_UserId",
                         column: x => x.UserId,
