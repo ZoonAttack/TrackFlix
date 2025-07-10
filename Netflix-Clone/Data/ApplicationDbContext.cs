@@ -23,7 +23,7 @@ public class ApplicationDbContext : IdentityDbContext<User>
             .HasForeignKey(um => um.UserId);
 
         builder.Entity<UserShow>()
-           .HasKey(um => new { um.UserId, um.ShowId });
+           .HasKey(um => new { um.UserId, um.ShowId, um.SeasonId });
 
         builder.Entity<UserShow>()
             .HasOne(um => um.User)
