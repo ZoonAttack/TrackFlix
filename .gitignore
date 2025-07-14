@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /Netflix-Clone/appsettings.json
 /Netflix-Clone/appsettings.Development.json
+/Netflix-Clone/appsettings-development.json
+/TrackFlix/appsettings.Development.json
