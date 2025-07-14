@@ -1,5 +1,5 @@
-﻿using Netflix_Clone.Data;
-using Netflix_Clone.Data.Utility;
+﻿using TrackFlix.Data;
+using TrackFlix.Data.Utility;
 
 
 public class UserShow

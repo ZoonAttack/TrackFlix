@@ -1,7 +1,7 @@
-﻿using Netflix_Clone.Data.Utility;
-using Netflix_Clone.Data;
+﻿using TrackFlix.Data.Utility;
+using TrackFlix.Data;
 
-namespace Netflix_Clone.Models
+namespace TrackFlix.Models
 {
     public class ShowsPageViewModel
     {

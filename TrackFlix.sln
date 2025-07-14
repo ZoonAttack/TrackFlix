@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix-Clone", "Netflix-Clone\Netflix-Clone.csproj", "{1AC1B456-631A-4D6D-A9D0-30C8FCB0DBF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackFlix", "Netflix-Clone\TrackFlix.csproj", "{1AC1B456-631A-4D6D-A9D0-30C8FCB0DBF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

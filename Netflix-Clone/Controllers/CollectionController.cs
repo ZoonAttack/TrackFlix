@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Netflix_Clone.Data;
-using Netflix_Clone.Models;
+using TrackFlix.Data;
+using TrackFlix.Models;
 
-namespace Netflix_Clone.Controllers
+namespace TrackFlix.Controllers
 {
     public class CollectionController : Controller
     {

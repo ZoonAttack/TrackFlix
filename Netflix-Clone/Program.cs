@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Netflix_Clone.Data;
-using Netflix_Clone.Models;
+using TrackFlix.Data;
+using TrackFlix.Models;
 
-namespace Netflix_Clone
+namespace TrackFlix
 {
     public class Program
     {

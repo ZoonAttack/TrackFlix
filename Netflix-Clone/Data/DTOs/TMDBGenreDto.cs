@@ -1,6 +1,6 @@
-﻿using Netflix_Clone.Data.Utility;
+﻿using TrackFlix.Data.Utility;
 
-namespace Netflix_Clone.Data.DTOs
+namespace TrackFlix.Data.DTOs
 {
 
     public class TMDBGenreDto

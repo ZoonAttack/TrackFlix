@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Netflix_Clone.Models
+namespace TrackFlix.Models
 {
     public class UserLoginModel
     {

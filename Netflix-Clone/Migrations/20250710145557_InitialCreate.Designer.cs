@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Netflix_Clone.Migrations
+namespace TrackFlix.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250710145557_InitialCreate")]

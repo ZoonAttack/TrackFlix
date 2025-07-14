@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Netflix_Clone.Data
+namespace TrackFlix.Data
 {
     public class User : IdentityUser
     {

@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Netflix_Clone.Models;
+using TrackFlix.Models;
 
-namespace Netflix_Clone.Controllers
+namespace TrackFlix.Controllers
 {
     public class HomeController : Controller
     {
