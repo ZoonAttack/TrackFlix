@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
-using Netflix_Clone.Data;
-using Netflix_Clone.Data.DTOs;
-using Netflix_Clone.Data.Utility;
-using Netflix_Clone.Mappers;
+using TrackFlix.Data;
+using TrackFlix.Data.DTOs;
+using TrackFlix.Data.Utility;
+using TrackFlix.Mappers;
 using System.Text.Json;
 
-namespace Netflix_Clone.Models
+namespace TrackFlix.Models
 {
     public class TMDBService
     {

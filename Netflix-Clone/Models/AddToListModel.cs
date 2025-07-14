@@ -1,6 +1,6 @@
-﻿using Netflix_Clone.Data.Utility;
+﻿using TrackFlix.Data.Utility;
 
-namespace Netflix_Clone.Models
+namespace TrackFlix.Models
 {
     public class AddToListModel
     {

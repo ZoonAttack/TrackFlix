@@ -1,6 +1,6 @@
-﻿using Netflix_Clone.Data;
+﻿using TrackFlix.Data;
 
-namespace Netflix_Clone.Models
+namespace TrackFlix.Models
 {
     public class UserListViewModel
     {

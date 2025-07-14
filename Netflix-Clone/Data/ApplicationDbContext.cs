@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Netflix_Clone.Data;
+using TrackFlix.Data;
 
 public class ApplicationDbContext : IdentityDbContext<User>
 {

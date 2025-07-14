@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Netflix_Clone-0d29d50a-82f6-4cbb-8a7a-a56fcc2de15b</UserSecretsId>
-    <RootNamespace>Netflix_Clone</RootNamespace>
+    <RootNamespace>TrackFlix</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace Netflix_Clone.Data.Utility
+﻿namespace TrackFlix.Data.Utility
 {
     public enum WatchStatus
     {

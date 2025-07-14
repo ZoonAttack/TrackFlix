@@ -1,6 +1,6 @@
-﻿using Netflix_Clone.Data.DTOs;
+﻿using TrackFlix.Data.DTOs;
 
-namespace Netflix_Clone.Data
+namespace TrackFlix.Data
 {
     public class TMDBResponse<T>
     {

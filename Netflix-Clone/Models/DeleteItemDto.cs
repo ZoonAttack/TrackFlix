@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Netflix_Clone.Models
+namespace TrackFlix.Models
 {
     public class DeleteItemDto
     {

@@ -1,4 +1,4 @@
-﻿namespace Netflix_Clone.Data.DTOs
+﻿namespace TrackFlix.Data.DTOs
 {
     public class TMDBSeasonDto
     {

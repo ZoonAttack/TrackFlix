@@ -1,9 +1,9 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Netflix_Clone.Data;
-using Netflix_Clone.Data.DTOs;
-using Netflix_Clone.Data.Utility;
+using TrackFlix.Data;
+using TrackFlix.Data.DTOs;
+using TrackFlix.Data.Utility;
 
-namespace Netflix_Clone.Mappers
+namespace TrackFlix.Mappers
 {
     public static class TMDBResponseMapper
     {
