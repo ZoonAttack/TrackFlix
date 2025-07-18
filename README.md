@@ -4,23 +4,6 @@ TrackFlix is a full-stack web application that allows users to **track, manage, 
 
 ---
 
-## 🌐 Live Preview
-
-> _[Optional: Add link here if deployed (e.g., via Azure, Vercel, Netlify, etc.)]_
-
----
-
-## 🚀 Tech Stack
-
-| Layer        | Technology                     |
-|--------------|--------------------------------|
-| Frontend     | HTML, CSS, JavaScript          |
-| Backend      | ASP.NET Core MVC (C#)          |
-| API          | TMDB (The Movie Database) API  |
-| Styling      | Custom CSS                     |
-
----
-
 ## 📌 Key Features
 
 ### 🔍 Browsing
@@ -43,6 +26,36 @@ TrackFlix is a full-stack web application that allows users to **track, manage, 
 - Rate each item after watching.
 
 ---
+## 🚀 Tech Stack
 
-## 🧰 Project Structure
+| Layer        | Technology                     |
+|--------------|--------------------------------|
+| Frontend     | HTML, CSS, JavaScript          |
+| Backend      | ASP.NET Core MVC (C#)          |
+| API          | TMDB (The Movie Database) API  |
+| Styling      | Custom CSS                     |
 
+---
+
+## 🎯 Objective
+
+TrackFlix was built to solve a simple problem:  
+> _"How can I keep track of what I’m watching, what I want to watch, and what I’ve already completed?"_
+
+It aims to provide a smooth, visually appealing, and practical solution for **media tracking**, with real-time data and personalized lists.
+
+---
+
+## 💡 Future Improvements
+
+- Sorting and filtering.
+- Recommendations based on watch history.
+- Dark mode toggle.
+- Accessing other people's lists
+
+---
+
+## 🙌 Acknowledgements
+
+- [TMDB API](https://www.themoviedb.org/documentation/api)
+- ASP.NET Core MVC Framework
