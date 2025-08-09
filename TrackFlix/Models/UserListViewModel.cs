@@ -7,5 +7,9 @@ namespace TrackFlix.Models
         public UserListModel<UserShow, Show> Shows { get; set; }
 
         public UserListModel<UserMovie, Movie> Movies { get; set; }
+
+
+        public bool IsOwner;
+
     }
 }

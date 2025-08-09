@@ -6,5 +6,7 @@ namespace TrackFlix.Models
     {
         public List<T1> ListData { get; set; }
         public List<T2> CollectionData { get; set; }
+
+
     }
 }

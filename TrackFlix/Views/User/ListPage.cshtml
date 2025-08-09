@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "My List";
+    ViewData["Title"] = "List";
     Layout = "_CollectionLayout";
 }
 @model TrackFlix.Models.UserListViewModel
@@ -62,8 +62,11 @@
                                 data-type="show"
                                 data-ShowId="@userShow.ShowId"
                                 data-SeasonId="@userShow.SeasonId">
+
                                 <td align="center">
+                                @if(@Model.IsOwner){
                                     <button class="delete-btn" title="Remove from list">❌</button>
+                                }
                                 </td>
                                 <th align="center">@index</th>
                                 <td>
@@ -79,7 +82,7 @@
                                 <td align="center">@show.ReleaseDate</td>
                                 <td align="center">TV Show</td>
                                 <td align="center"><span class="score">@userShow.Rating</span></td>
-                                @if(userShow.EpisodesWatched != season.EpisodesCount)
+                                @if (userShow.EpisodesWatched != season.EpisodesCount && @Model.IsOwner)
                                 {
                                     <td align="center">
                                         <a asp-action="UpdateSeasonProgress" asp-controller="User" asp-route-option="decrease" asp-route-showId=@userShow.ShowId asp-route-seasonId=@userShow.SeasonId asp-route-episodesCount=@season.EpisodesCount class="progress-btn">-</a>
@@ -111,7 +114,10 @@
                                 data-Type="movie"
                                 data-MovieId="@userMovie.MovieId">
                                 <td align="center">
-                                    <button class="delete-btn" title="Remove from list">❌</button>
+                                    @if (@Model.IsOwner)
+                                    {
+                                        <button class="delete-btn" title="Remove from list">❌</button>
+                                    }
                                 </td>
                                 <th align="center">@index</th>
                                 <td>

@@ -25,7 +25,7 @@ namespace TrackFlix.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return RedirectToAction("GetMyListPage");
+            return RedirectToAction("List", new { name = User.Identity?.Name });
         }
 
         [HttpPost]
@@ -80,6 +80,8 @@ namespace TrackFlix.Controllers
         [HttpPost]
 
         [HttpPost]
+        [Authorize]
+
         public async Task<IActionResult> AddMovieToList(AddToListModel model)
         { 
             //1: Get the current user
@@ -107,6 +109,9 @@ namespace TrackFlix.Controllers
             //6: Return a success response
             return Ok();
         }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddShowToList(AddToListModel model)
         {
             //1: Get the current user
@@ -115,7 +120,7 @@ namespace TrackFlix.Controllers
             Show show = await _tmdbService.GetShow(model.ShowId);
             //3: Check if the show + season already exists in the user's list
             bool result = await _dbContext.UserShows
-                .AnyAsync(um => um.UserId == user.Id && um.ShowId == model.ShowId && um.SeasonId != model.SeasonId);
+                .AnyAsync(um => um.UserId == user.Id && um.ShowId == model.ShowId && um.SeasonId == model.SeasonId);
             //4: If it doesn't exist, add it to the user's list
             UserShow userMovie = new UserShow()
             {
@@ -137,23 +142,34 @@ namespace TrackFlix.Controllers
             //6: Return a success response
             return Ok();
         }
-        [Authorize]
-        public async Task<IActionResult> GetMyListPage()
+
+        [HttpGet("/List/{name}")]
+        public async Task<IActionResult> List(string name)
         {
-            UserListModel<UserMovie, Movie> userMovies = await GetListMovies();
-            UserListModel<UserShow, Show> userShows = await GetListShows();
+            var listOwner = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == name);
+            if (listOwner == null) return NotFound();
+
+            var currentUserId = _userManager.GetUserId(User);
+
+
+            // Get the user's movies and shows
+            UserListModel<UserMovie, Movie> userMovies = await GetListMovies(listOwner.Id);
+            UserListModel<UserShow, Show> userShows = await GetListShows(listOwner.Id);
             UserListViewModel model = new UserListViewModel
             {
                 Movies = userMovies,
-                Shows = userShows
+                Shows = userShows,
+                IsOwner = listOwner.Id == currentUserId
             };
-            return View("MyListPage", model);
+            return View("ListPage", model);
         }
 
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateSeasonProgress(string option, int showId, int seasonId, int episodesCount)
         {
 
-            var userShow = _dbContext.UserShows.SingleOrDefault(x => x.ShowId == showId && x.SeasonId == seasonId);
+            var userShow = _dbContext.UserShows.SingleOrDefault(x => x.ShowId == showId && x.SeasonId == seasonId && x.UserId == _userManager.GetUserId(User));
             if (userShow == null) return BadRequest();
 
             if (option == "increase")
@@ -162,10 +178,11 @@ namespace TrackFlix.Controllers
 
             if (userShow.EpisodesWatched == episodesCount) userShow.Status = Data.Utility.WatchStatus.COMPLETED;
             await _dbContext.SaveChangesAsync();
-            return RedirectToAction("GetMyListPage");
+            return RedirectToAction("List");
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteFromList([FromBody] DeleteItemDto request)
         {
             var userId = _userManager.GetUserId(User);
@@ -207,10 +224,10 @@ namespace TrackFlix.Controllers
 
 
         #region Helper Methods
-        public async Task<UserListModel<UserMovie, Movie>> GetListMovies()
+        public async Task<UserListModel<UserMovie, Movie>> GetListMovies(string id)
         {
             //Get User Movies
-            List<UserMovie> userMovies = await _dbContext.UserMovies.Where(um => um.UserId == _userManager.GetUserId(User)).ToListAsync();
+            List<UserMovie> userMovies = await _dbContext.UserMovies.Where(um => um.UserId == id).ToListAsync();
             List<Movie> movies = new List<Movie>();
 
             foreach (int movieId in userMovies.Select(um => um.MovieId))
@@ -227,10 +244,10 @@ namespace TrackFlix.Controllers
                 CollectionData = movies
             };
         }
-        public async Task<UserListModel<UserShow, Show>> GetListShows()
+        public async Task<UserListModel<UserShow, Show>> GetListShows(string id)
         {
             //Get User Movies
-            List<UserShow> userShows = await _dbContext.UserShows.Where(um => um.UserId == _userManager.GetUserId(User)).ToListAsync();
+            List<UserShow> userShows = await _dbContext.UserShows.Where(um => um.UserId == id).ToListAsync();
             List<Show> shows = new List<Show>();
 
             foreach (int showId in userShows.Select(um => um.ShowId))
