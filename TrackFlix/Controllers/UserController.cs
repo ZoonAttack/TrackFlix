@@ -164,7 +164,7 @@ namespace TrackFlix.Controllers
             return View("ListPage", model);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public async Task<IActionResult> UpdateSeasonProgress(string option, int showId, int seasonId, int episodesCount)
         {
@@ -178,7 +178,7 @@ namespace TrackFlix.Controllers
 
             if (userShow.EpisodesWatched == episodesCount) userShow.Status = Data.Utility.WatchStatus.COMPLETED;
             await _dbContext.SaveChangesAsync();
-            return RedirectToAction("List");
+            return RedirectToAction("List", new { name = _userManager.GetUserName(User) });
         }
 
         [HttpPost]
