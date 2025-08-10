@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TrackFlix.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250710145557_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250810030842_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,7 +161,7 @@ namespace TrackFlix.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Netflix_Clone.Data.User", b =>
+            modelBuilder.Entity("TrackFlix.Data.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -294,7 +294,7 @@ namespace TrackFlix.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.User", null)
+                    b.HasOne("TrackFlix.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -303,7 +303,7 @@ namespace TrackFlix.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.User", null)
+                    b.HasOne("TrackFlix.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -318,7 +318,7 @@ namespace TrackFlix.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Netflix_Clone.Data.User", null)
+                    b.HasOne("TrackFlix.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -327,7 +327,7 @@ namespace TrackFlix.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.User", null)
+                    b.HasOne("TrackFlix.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -336,7 +336,7 @@ namespace TrackFlix.Migrations
 
             modelBuilder.Entity("UserMovie", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.User", "User")
+                    b.HasOne("TrackFlix.Data.User", "User")
                         .WithMany("Movies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -347,7 +347,7 @@ namespace TrackFlix.Migrations
 
             modelBuilder.Entity("UserShow", b =>
                 {
-                    b.HasOne("Netflix_Clone.Data.User", "User")
+                    b.HasOne("TrackFlix.Data.User", "User")
                         .WithMany("Shows")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -356,7 +356,7 @@ namespace TrackFlix.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Netflix_Clone.Data.User", b =>
+            modelBuilder.Entity("TrackFlix.Data.User", b =>
                 {
                     b.Navigation("Movies");
 
