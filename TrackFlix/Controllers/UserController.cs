@@ -25,7 +25,7 @@ namespace TrackFlix.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return RedirectToAction("List", new { name = User.Identity?.Name });
+            return RedirectToList();
         }
 
         [HttpPost]
@@ -178,7 +178,7 @@ namespace TrackFlix.Controllers
 
             if (userShow.EpisodesWatched == episodesCount) userShow.Status = Data.Utility.WatchStatus.COMPLETED;
             await _dbContext.SaveChangesAsync();
-            return RedirectToAction("List", new { name = _userManager.GetUserName(User) });
+            return RedirectToList();
         }
 
         [HttpPost]
@@ -263,6 +263,11 @@ namespace TrackFlix.Controllers
                 ListData = userShows,
                 CollectionData = shows
             };
+        }
+
+        private IActionResult RedirectToList()
+        {
+           return RedirectToAction("List", new { name = _userManager.GetUserName(User) });
         }
         #endregion
     }
